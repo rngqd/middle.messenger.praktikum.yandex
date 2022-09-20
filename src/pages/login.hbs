@@ -1,0 +1,16 @@
+---
+title: "Войти"
+---
+
+{{!< main}}
+
+
+<main class="main login-page">
+    <form class="login-page__container">
+        <p class="login-page__title">{{title}}</p>
+        {{> "input/input"type="text" name="login" title="Логин"}}
+        {{> "input/input" type="password" name="password" title="Пароль"}}
+        {{> "button/button" }}
+        <a href="./register.hbs" class="login-page__link">Ещё не зарегистрированы?</a>
+    </form>
+</main>
