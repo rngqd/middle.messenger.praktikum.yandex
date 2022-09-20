@@ -1,0 +1,53 @@
+@import "src/styles/variables.sass"
+.chat
+  padding: 12px 10px
+  border-top: 1px solid $dark
+  border-bottom: 1px solid $dark
+  display: flex
+  &:not(:first-child)
+    margin-top: -1px
+
+  &_selected
+    background: $accent
+
+  &__avatar
+    background: 50% 50% no-repeat
+    margin-right: 10px
+    background-size: cover
+    width: 47px
+    height: 47px
+    border-radius: 50%
+
+  &__container
+    display: flex
+    flex-direction: column
+
+    &_data
+      margin-left: auto
+      justify-content: space-between
+
+  &__profile-name
+    font-weight: 600
+    font-size: 13px
+    line-height: 1
+    color: $dark
+
+  &__message
+    font-weight: 500
+    font-size: 12px
+    line-height: 15px
+    color: $gray
+
+  &__time
+    font-size: 9px
+    line-height: 13px
+    color: $bg
+
+  &__message-count
+    padding: 4px
+    font-size: 11px
+    line-height: 1
+    text-align: center
+    color: $bg
+    background: $dark
+    border-radius: 50%

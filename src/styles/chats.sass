@@ -1,0 +1,121 @@
+@import "variables.sass"
+.chats-page
+  height: 100%
+  display: flex
+
+  &__container
+
+    &_left
+      padding: 21px 10px 0
+      display: flex
+      flex-direction: column
+      width: 24%
+      background: $secondary
+
+    &_right
+      width: 76%
+
+  &__profile
+    color: $bg
+    text-decoration: none
+    text-align: right
+    &:after
+      content: ""
+      display: inline-block
+      width: 4px
+      height: 8px
+      margin-left: 8px
+      background: url("../../static/icon/Arrow_right.svg") 50% 50% no-repeat
+      background-size: cover
+
+  &__search
+    margin-top: 21px
+    padding: 10px 20px
+    height: 32px
+    border: none
+    border-radius: 5px
+    &::-webkit-input-placeholder
+      display: inline-block
+      padding-left: 30px
+      background: url("../../static/icon/search.svg") 0% 50% no-repeat
+
+  &__chats
+    margin-top: 24px
+    overflow: scroll
+
+  &__chat
+    display: flex
+    padding: 10px 20px
+    flex-direction: column
+    height: calc(100vh - 20px)
+
+  &__header
+    display: flex
+    padding-bottom: 10px
+    justify-content: space-between
+    align-items: center
+    border-bottom: 1px solid $bg
+    flex-basis: 44px
+
+  &__header-container
+    display: flex
+    align-items: center
+
+  &__header-avatar
+    height: 34px
+    margin-right: 10px
+    background-size: cover
+    border-radius: 50%
+
+  &__header-name
+    color: $accent-2
+    font-weight: 600
+    font-size: 13px
+    line-height: 1
+
+  &__header-function
+    background: url("../../static/icon/more.svg") 50% 50% no-repeat
+    background-size: contain
+    height: 15px
+    border: none
+
+  &__content
+    flex: 1
+    overflow: scroll
+
+  &__footer
+    padding-top: 10px
+    display: flex
+    border-top: 1px solid $bg
+    flex-basis: 44px
+    justify-content: space-between
+    align-items: center
+
+  &__footer-clip
+    height: 32px
+    width: 32px
+    background: url("../../static/icon/clip.svg") 50% 50% no-repeat
+    background-size: contain
+    border: none
+
+  &__footer-input
+    width: 100%
+    padding: 10px 20px
+    margin: 0 10px
+    background-color: $bg
+    border: none
+    border-radius: 30px
+
+  &__footer-send
+    width: 11px
+    height: 10px
+    padding: 12px
+    background: url("../../static/icon/send.svg") 50% 50% no-repeat
+    background-size: cover
+    border: none
+    border-radius: 50%
+    background-color: $accent-2
+
+.links
+  display: flex
+  flex-direction: column
