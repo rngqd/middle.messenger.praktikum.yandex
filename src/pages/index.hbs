@@ -1,0 +1,66 @@
+---
+avatarUrl: "../../static/img/avatar.jpeg"
+---
+{{!< main}}
+
+
+    <main class="main chats-page">
+        <div class="chats-page__container chats-page__container_left">
+            <a class="chats-page__profile" href="./profile.hbs">Профиль</a>
+            <input class="chats-page__search" type="text" placeholder="Поиск">
+            <div class="chats-page__chats">
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+                {{> "chat/chat" url=avatarUrl}}
+            </div>
+        </div>
+        <div class="chats-page__container chats-page__container_right">
+            <div class="chats-page__chat">
+                <div class="chats-page__header">
+                    <div class="chats-page__header-container">
+                        <img class="chats-page__header-avatar" 
+                             src="../../static/img/avatar.jpeg" 
+                             alt="chat-avatar">
+                        <span class="chats-page__header-name">Имя пользователя</p>
+                    </div>
+                    <button class="chats-page__header-function" src="../../static/icon/more.svg">
+                </div>
+                <div class="chats-page__content">
+                        <div class="links">
+                                На страницы можно перейти по ссылкам: 
+                                <a class="link" href="./login.hbs">Страница логина</a>
+                                <a class="link" href="./register.hbs">Страница регистрации</a>
+                                <a class="link" href="./404.hbs">Страница 404</a>
+                                <a class="link" href="./500.hbs">Страница 500</a>
+                                <a class="link" href="./profile.hbs">Страница профиля</a>
+                        </div>
+                </div>
+                <div class="chats-page__footer">
+                    <button class="chats-page__footer-clip"/>
+                    <input class="chats-page__footer-input" type="text" placeholder="Сообщение">
+                    <button class="chats-page__footer-send"/>  
+                </div>
+            </div>
+        </div>
+    </main>
+
