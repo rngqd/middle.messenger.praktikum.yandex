@@ -8,8 +8,11 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "declaration": false,
-    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "sourceMap": true,
+    "strictNullChecks": true,
     "typeRoots": [
       "node_modules/@types",
       "typings/app.d.ts"
