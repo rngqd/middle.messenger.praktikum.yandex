@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "parcel src/*.html src/**/*.html",
     "build": "parcel build src/*.html src/**/*.html --public-url ./ --no-cache",
-    "start": "parcel build src/index.html && node ./server.js",
+    "start": "npm run build && node ./server.js",
     "prettier": "prettier 'src/**/*.ts'",
     "prettier:fix": "prettier --write 'src/**/*.ts'"
   },
