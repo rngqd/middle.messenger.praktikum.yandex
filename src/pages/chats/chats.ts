@@ -9,7 +9,7 @@ export class ChatsPage extends Block {
         return `
             <main class="main chats-page">
                 <div class="chats-page__container chats-page__container_left">
-                    <a class="chats-page__profile" href="pages/profile">Профиль</a>
+                    <a class="chats-page__profile" href="/pages/profile">Профиль</a>
                     <input class="chats-page__search" type="text" placeholder="Поиск">
                     <div class="chats-page__chats">
                         {{{ Chat

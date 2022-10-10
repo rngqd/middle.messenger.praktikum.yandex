@@ -82,7 +82,7 @@ export class LoginPage extends Block {
               onBlur=onBlur
           }}}
           {{{Button title="Войти" className="button" onClick=onLogin}}}
-          <a href="pages/register" class="login-page__link">Ещё не зарегистрированы?</a>
+          <a href="/pages/register" class="login-page__link">Ещё не зарегистрированы?</a>
         </form>
       </main>
     `;
