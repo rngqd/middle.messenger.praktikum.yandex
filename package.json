@@ -4,8 +4,8 @@
   "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
   "scripts": {
     "dev": "parcel src/**/*.html",
-    "build": "parcel build src/index.html --public-url ./ --no-cache",
-    "start": "parcel build src/index.html && node ./server.js",
+    "build": "parcel build src/**/*.html --public-url ./ --no-cache",
+    "start": "npm run build && node ./server.js",
     "prettier": "prettier 'src/**/*.ts'",
     "prettier:fix": "prettier --write 'src/**/*.ts'"
   },

@@ -27,7 +27,7 @@ export class Chat extends Block {
                     <p class="chat__message">{{message}}</p>
                 </div>
                 <div class="chat__container chat__container_data">
-                    <p class="chat__time">{{time}}</p>
+                    <time class="chat__time">{{time}}</time>
                     <p class="chat__message-count">{{count}}</p>
                 </div>
             </div>

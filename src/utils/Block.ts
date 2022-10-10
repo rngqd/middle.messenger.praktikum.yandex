@@ -60,7 +60,6 @@ export default class Block<P = any> {
 
  protected getStateFromProps(props: any): void {
   this.state = {};
-  console.log(props)
  }
 
  init() {
@@ -84,7 +83,6 @@ export default class Block<P = any> {
  
  protected componentDidUpdate(oldProps: P, newProps: P) {
   if (oldProps === newProps) {
-   console.log('oldProps =', oldProps, 'newProps =', newProps)
   }
   
   return true
