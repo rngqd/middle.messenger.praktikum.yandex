@@ -13,8 +13,8 @@ interface ChatProps {
 
 export class Chat extends Block {
  static componentName = "Chat";
- constructor({avatar, name, message, time, count, onClick}: ChatProps) {
-  super({avatar, name, message, time, count, onClick, events: {click: onClick}});
+ constructor({onClick, ...props}: ChatProps) {
+  super({...props, events: {click: onClick}});
  }
 
  protected render(): string {

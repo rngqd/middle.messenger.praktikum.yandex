@@ -1,4 +1,4 @@
-export interface IInputData {
+export type IInputData = {
     email?: string,
     login?: string,
     password?: string,
@@ -8,3 +8,8 @@ export interface IInputData {
     second_name?: string,
     phone?: string,
 }
+
+export type IState = {
+    errors: IInputData;
+    values: IInputData;
+};

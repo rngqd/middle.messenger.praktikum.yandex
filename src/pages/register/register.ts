@@ -1,6 +1,7 @@
 import Block from "../../utils/Block";
-import {validateInput} from "../../utils/validation";
-import {IInputData} from "../../models";
+import { validateInput } from "../../utils/validation";
+import { IState } from "../../models";
+import { makeDataObject } from "../../utils/functions";
 
 export class RegisterPage extends Block {
  protected getStateFromProps() {
@@ -24,18 +25,10 @@ export class RegisterPage extends Block {
     second_name: "",
    },
    onRegister: () => {
-    const registerData = {
-     login: (this.refs.login.querySelector("input") as HTMLInputElement).value,
-     password: (this.refs.password.querySelector("input") as HTMLInputElement).value,
-     repeat_password: (this.refs.repeat_password.querySelector("input") as HTMLInputElement).value,
-     email: (this.refs.email.querySelector("input") as HTMLInputElement).value,
-     phone: (this.refs.phone.querySelector("input") as HTMLInputElement).value,
-     first_name: (this.refs.first_name.querySelector("input") as HTMLInputElement).value,
-     second_name: (this.refs.second_name.querySelector("input") as HTMLInputElement).value,
-    };
+    const registerData = makeDataObject(this.state.values, this.refs);
 
-    const nextState: {errors: IInputData; values: IInputData} = {
-     errors: {
+    const nextState: IState= {
+     errors: validateInput(registerData, {
       login: "",
       password: "",
       repeat_password: "",
@@ -43,11 +36,9 @@ export class RegisterPage extends Block {
       phone: "",
       first_name: "",
       second_name: "",
-     },
+     }),
      values: {...registerData},
     };
-
-    nextState.errors = validateInput(registerData, nextState.errors);
 
     this.setState(nextState);
 
@@ -57,30 +48,21 @@ export class RegisterPage extends Block {
    setState: () => {},
 
    onBlur: () => {
-    const registerData = {
-     login: (this.refs.login.querySelector("input") as HTMLInputElement).value,
-     password: (this.refs.password.querySelector("input") as HTMLInputElement).value,
-     repeat_password: (this.refs.repeat_password.querySelector("input") as HTMLInputElement).value,
-     email: (this.refs.email.querySelector("input") as HTMLInputElement).value,
-     phone: (this.refs.phone.querySelector("input") as HTMLInputElement).value,
-     first_name: (this.refs.first_name.querySelector("input") as HTMLInputElement).value,
-     second_name: (this.refs.second_name.querySelector("input") as HTMLInputElement).value,
-    };
-    const nextState: {errors: IInputData; values: IInputData} = {
-     errors: {
-      email: "",
+    const registerData = makeDataObject(this.state.values, this.refs);
+ 
+    const nextState: IState= {
+     errors: validateInput(registerData, {
       login: "",
       password: "",
       repeat_password: "",
+      email: "",
+      phone: "",
       first_name: "",
       second_name: "",
-      phone: "",
-     },
+     }),
      values: {...registerData},
     };
-
-    nextState.errors = validateInput(registerData, nextState.errors);
-
+    
     this.setState(nextState);
    },
   };

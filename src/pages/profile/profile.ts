@@ -2,7 +2,9 @@ import Block from "../../utils/Block";
 import {validateInput} from "../../utils/validation";
 import avatarImg from "../../../static/img/avatar.jpeg";
 import backArrowIcon from "../../../static/icon/arrow_back.svg";
-import {IInputData} from "../../models";
+import { IState } from "../../models";
+import { makeDataObject } from "../../utils/functions";
+
 export class ProfilePage extends Block {
  protected getStateFromProps() {
   this.state = {
@@ -23,53 +25,24 @@ export class ProfilePage extends Block {
     phone: "",
    },
    onBlur: () => {
-    const profileData = {
-     email: (this.refs.email.querySelector("input") as HTMLInputElement).value,
-     login: (this.refs.login.querySelector("input") as HTMLInputElement).value,
-     first_name: (this.refs.first_name.querySelector("input") as HTMLInputElement).value,
-     second_name: (this.refs.second_name.querySelector("input") as HTMLInputElement).value,
-     display_name: (this.refs.display_name.querySelector("input") as HTMLInputElement).value,
-     phone: (this.refs.phone.querySelector("input") as HTMLInputElement).value,
-    };
+    const profileData = makeDataObject(this.state.values, this.refs);
 
-    const nextState: {errors: IInputData; values: IInputData} = {
-     errors: {
+    const nextState: IState = {
+     errors: validateInput(profileData,{
       email: "",
       login: "",
       first_name: "",
       second_name: "",
       display_name: "",
       phone: "",
-     },
+     }),
      values: {...profileData},
     };
-
-    nextState.errors = validateInput(profileData, nextState.errors);
 
     this.setState(nextState);
    },
    onChangeData: () => {
-    const profileData = {
-     email: (this.refs.email.querySelector("input") as HTMLInputElement).value,
-     login: (this.refs.login.querySelector("input") as HTMLInputElement).value,
-     first_name: (this.refs.first_name.querySelector("input") as HTMLInputElement).value,
-     second_name: (this.refs.second_name.querySelector("input") as HTMLInputElement).value,
-     display_name: (this.refs.display_name.querySelector("input") as HTMLInputElement).value,
-     phone: (this.refs.phone.querySelector("input") as HTMLInputElement).value,
-    };
-    const nextState: {errors: IInputData; values: IInputData} = {
-     errors: {
-      email: "",
-      login: "",
-      first_name: "",
-      second_name: "",
-      display_name: "",
-      phone: "",
-     },
-     values: {...profileData},
-    };
-
-    nextState.errors = validateInput(profileData, nextState.errors);
+    const profileData = makeDataObject(this.state.values, this.refs);
 
     console.log("action/change profile data", profileData);
    },

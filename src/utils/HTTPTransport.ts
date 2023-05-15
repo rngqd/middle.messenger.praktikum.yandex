@@ -1,3 +1,5 @@
+import { queryStringify } from "./functions";
+
 const METHODS = {
  GET: "GET",
  POST: "POST",
@@ -17,35 +19,27 @@ const initialOptions: Options = {
  timeout: 5000,
 };
 
-function queryStringify(data: any) {
- if (typeof data !== "object") {
-  throw new Error("Data must be object");
- }
 
- const keys = Object.keys(data);
- return keys.reduce((result, key, index) => {
-  return `${result}${key}=${data[key]}${index < keys.length - 1 ? "&" : ""}`;
- }, "?");
-}
 
 class HTTPTransport {
  get = (url: string, options: Options = initialOptions) => {
-  return this.request(url, {...options, method: METHODS.GET}, options.timeout);
+  const parsedUrl = !!options.data ? `${url}${queryStringify(options.data)}` : url
+  return this.request(parsedUrl, {...options, method: METHODS.GET});
  };
 
  post = (url: string, options: Options = initialOptions) => {
-  return this.request(url, {...options, method: METHODS.POST}, options.timeout);
+  return this.request(url, {...options, method: METHODS.POST});
  };
 
  put = (url: string, options: Options = initialOptions) => {
-  return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
+  return this.request(url, {...options, method: METHODS.PUT});
  };
 
  delete = (url: string, options: Options = initialOptions) => {
-  return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
+  return this.request(url, {...options, method: METHODS.DELETE});
  };
 
- request = (url: string, options: Options = initialOptions, timeout = 5000) => {
+ request = (url: string, options: Options = initialOptions) => {
   const {headers = {}, method, data} = options;
 
   return new Promise((resolve, reject) => {
@@ -55,9 +49,9 @@ class HTTPTransport {
    }
 
    const xhr = new XMLHttpRequest();
-   const isGet = method === METHODS.GET;
+  
 
-   xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
+   xhr.open(method, url);
 
    Object.keys(headers).forEach((key: string) => {
     xhr.setRequestHeader(key, headers[key]);
@@ -70,10 +64,10 @@ class HTTPTransport {
    xhr.onabort = reject;
    xhr.onerror = reject;
 
-   xhr.timeout = timeout;
+   xhr.timeout = options.timeout;
    xhr.ontimeout = reject;
 
-   if (isGet || !data) {
+   if (!data) {
     xhr.send();
    } else {
     xhr.send(data);

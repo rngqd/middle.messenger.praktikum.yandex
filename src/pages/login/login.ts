@@ -1,52 +1,46 @@
 import Block from "../../utils/Block";
 import {validateInput} from "../../utils/validation";
-import {IInputData} from "../../models";
+import {IState} from "../../models";
+import { makeDataObject } from "../../utils/functions";
 
 export class LoginPage extends Block {
  protected getStateFromProps() {
   this.state = {
-   values: {
+   initialValues: {
     login: "",
     password: "",
+   },
+   values: {
+   
    },
    errors: {
     login: "",
     password: "",
    },
-
+   
    onLogin: () => {
-    const loginData = {
-     login: (this.refs.login.querySelector("input") as HTMLInputElement).value,
-     password: (this.refs.password.querySelector("input") as HTMLInputElement).value,
-    };
-    const nextState: {errors: IInputData; values: IInputData} = {
-     errors: {
+    const loginData = makeDataObject(this.state.values, this.refs);
+    const nextState: IState = {
+     errors: validateInput(loginData, {
       login: "",
       password: "",
-     },
+     }),
      values: {...loginData},
     };
-
-    nextState.errors = validateInput(loginData, nextState.errors);
-
+    
     this.setState(nextState);
 
     console.log("action/login", loginData);
    },
    onBlur: () => {
-    const loginData = {
-     login: (this.refs.login.querySelector("input") as HTMLInputElement).value,
-     password: (this.refs.password.querySelector("input") as HTMLInputElement).value,
-    };
-    const nextState: {errors: IInputData; values: IInputData} = {
-     errors: {
+    const loginData = makeDataObject(this.state.values, this.refs);
+    const nextState: IState =  {
+     errors: validateInput(loginData, {
       login: "",
       password: "",
-     },
+     }),
      values: {...loginData},
     };
-
-    nextState.errors = validateInput(loginData, nextState.errors);
 
     this.setState(nextState);
    },
