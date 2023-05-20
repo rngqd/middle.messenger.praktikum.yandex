@@ -1,0 +1,42 @@
+.avatar-container
+  position: relative
+  height: 130px
+  width: 130px
+  border-radius: 50%
+  padding: 0
+  margin: 0 auto 27px
+  &:hover .avatar
+    opacity: 0.8
+
+
+  &:hover .avatar-overlay
+    display: block
+
+
+.avatar
+  display: flex
+  width: 130px
+  height: 130px
+  text-align: center
+  background: 50% 50% no-repeat
+  background-size: cover
+  object-fit: cover
+  border-radius: 50%
+  &:hover
+    cursor: pointer
+    background-color: #3F5080
+
+.avatar-overlay
+  position: absolute
+  z-index: 2
+  left: 0
+  top: 0
+  border-radius: 50%
+  width: 130px
+  height: 130px
+  background-image: url("/static/icon/edit.svg")
+  background-color: transparent
+  display: none
+  background-repeat: no-repeat
+  background-position: center
+

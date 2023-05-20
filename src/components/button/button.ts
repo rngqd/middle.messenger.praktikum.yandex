@@ -1,4 +1,4 @@
-import Block from "../../utils/Block";
+import Block from "../../core/Block";
 
 import "./button.sass";
 
@@ -18,7 +18,7 @@ export class Button extends Block {
  protected render(): string {
   // language=hbs
   return `
-      <button class="{{className}}" type="button">
+      <button class="button {{className}}" type="button"">
         {{title}}
       </button>
     `;

@@ -1,49 +1,32 @@
 import EventBus from "./EventBus";
-import {nanoid} from 'nanoid';
+import { nanoid } from 'nanoid';
 import Handlebars from "handlebars";
-
-interface BlockMeta<P = any> {
- props: P;
-}
 
 type Events = Values<typeof Block.EVENTS>;
 
-export default class Block<P = any> {
+export default class Block<P extends Record<string, any> = any> {
  static EVENTS = {
   INIT: "init",
   FLOW_CDM: "flow:component-did-mount",
   FLOW_CDU: "flow:component-did-update",
   FLOW_RENDER: "flow:render",
  } as const;
+
  static componentName: string
  public id = nanoid(6);
- private readonly _meta: BlockMeta;
 
  protected _element: Nullable<HTMLElement> = null;
  protected readonly props: P;
  protected children: {[id: string]: Block} = {};
+ protected refs: {[key: string]: Block} = {};
 
  eventBus: () => EventBus<Events>;
 
- protected state: any = {};
- protected refs: {[key: string]: HTMLElement} = {};
-
  public constructor(props?: P) {
   const eventBus = new EventBus<Events>();
-
-  this._meta = {
-   props,
-  };
-
-  this.getStateFromProps(props);
-
   this.props = this._makePropsProxy(props || ({} as P));
-  this.state = this._makePropsProxy(this.state);
-
   this.eventBus = () => eventBus;
-
   this._registerEvents(eventBus);
-
   eventBus.emit(Block.EVENTS.INIT, this.props);
  }
 
@@ -53,26 +36,24 @@ private _registerEvents(eventBus: EventBus<Events>) {
   eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
  }
- 
+
  private _createResources() {
   this._element = this._createDocumentElement("div");
- }
-
- protected getStateFromProps(props: any): void {
-  this.state = {};
  }
 
  init() {
   this._createResources();
   this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
  }
- 
- private _componentDidMount() {
-  this.componentDidMount();
+
+ private _componentDidMount(props: P) {
+  this.componentDidMount(props);
  }
 
- componentDidMount() {}
- 
+ componentDidMount(props: P) {
+  this.setProps(props)
+ }
+
  private _componentDidUpdate(oldProps: P, newProps: P) {
   const response = this.componentDidUpdate(oldProps, newProps);
   if (!response) {
@@ -80,31 +61,23 @@ private _registerEvents(eventBus: EventBus<Events>) {
   }
   this._render();
  }
- 
+
  protected componentDidUpdate(oldProps: P, newProps: P) {
-  if (oldProps === newProps) {
-  }
-  
+  if (oldProps === newProps) {}
+
   return true
  }
- 
+
  setProps = (nextProps: P) => {
   if (!nextProps) return;
-  
-  Object.assign(this.props, nextProps);
- };
 
- setState = (nextState: any) => {
-  if (!nextState) {
-   return;
-  }
-  Object.assign(this.state, nextState);
+  Object.assign(this.props, nextProps);
  };
 
  get element() {
   return this._element;
  }
- 
+
  private _render() {
   const fragment = this._compile();
 
@@ -143,7 +116,7 @@ private _makePropsProxy(props: any): any {
    },
    set(target: Record<string, unknown>, prop: string, value: unknown) {
     target[prop] = value;
-    
+
     self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
     return true;
    },
@@ -152,7 +125,7 @@ private _makePropsProxy(props: any): any {
    },
   }) as unknown as P;
  }
- 
+
  private _createDocumentElement(tagName: string) {
   return document.createElement(tagName);
  }
@@ -168,7 +141,7 @@ private _makePropsProxy(props: any): any {
    this._element!.removeEventListener(event, listener);
   });
  }
- 
+
  private _addEvents() {
   const events: Record<string, () => void> = (this.props as any).events;
 
@@ -180,13 +153,13 @@ private _makePropsProxy(props: any): any {
    this._element!.addEventListener(event, listener);
   });
  }
- 
+
  private _compile(): DocumentFragment {
   const fragment = document.createElement("template");
 
   const template = Handlebars.compile(this.render());
-  fragment.innerHTML = template({...this.state, ...this.props, children: this.children, refs: this.refs});
-  
+  fragment.innerHTML = template({...this.props, children: this.children, refs: this.refs});
+
   Object.entries(this.children).forEach(([id, component]) => {
 
    const stub = fragment.content.querySelector(`[data-id="${id}"]`);
@@ -196,17 +169,17 @@ private _makePropsProxy(props: any): any {
    }
 
    const stubChilds = stub.childNodes.length ? stub.childNodes : [];
-   
+
    const content = component.getContent();
    stub.replaceWith(content);
-   
+
    const layoutContent = content.querySelector('[data-layout="1"]');
 
    if (layoutContent && stubChilds.length) {
     layoutContent.append(...stubChilds);
    }
   });
-  
+
   return fragment.content;
  }
 

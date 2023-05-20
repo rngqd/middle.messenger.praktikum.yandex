@@ -1,0 +1,54 @@
+import { AuthAPI } from "./index";
+import {LoginData, SignupData} from "../../models"
+import Router from "../../router";
+import store from "../../store";
+
+class AuthController {
+  private readonly api: AuthAPI;
+  
+  constructor() {
+    this.api = new AuthAPI();
+  }
+  
+  async signin(data: LoginData) {
+    try {
+      await this.api.login(data);
+      
+      Router.go('/chats');
+    } catch (e: any) {
+      console.log(e.reason);
+    }
+  }
+  
+  async signup(data: SignupData) {
+    try {
+      await this.api.signup(data);
+      await this.fetchUser();
+      
+      Router.go('/chats');
+    } catch (e: any) {
+      console.log(e.reason);
+    }
+  }
+  
+  async fetchUser() {
+    try {
+      const user = await this.api.getUser();
+      store.set('user', user);
+      return user;
+    } catch (e: any) {
+      console.log(e.reason);
+    }
+  }
+  
+  async logout() {
+    try {
+      await this.api.logout();
+      Router.go('/login');
+    } catch (e: any) {
+      console.log(e.reason);
+    }
+  }
+}
+
+export default new AuthController();
