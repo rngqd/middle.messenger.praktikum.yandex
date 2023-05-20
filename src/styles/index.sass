@@ -1,14 +1,12 @@
-@import "src/partials/button/button.sass"
-@import "src/partials/input/input.sass"
-@import "src/partials/chat/chat.sass"
-@import "src/partials/messageFrom/messageFrom.sass"
-@import "src/partials/messageTo/messageTo.sass"
-@import "src/styles/chats.sass"
-@import "src/styles/login.sass"
-@import "src/styles/register.sass"
-@import "src/styles/error.sass"
-@import "src/styles/not-found.sass"
-@import "src/styles/profile.sass"
+@import "src/components/button/button.sass"
+@import "src/components/input/input.sass"
+@import "src/components/chat/chat.sass"
+@import "src/pages/chats/chats.sass"
+@import "src/pages/login/login.sass"
+@import "src/pages/register/register.sass"
+@import "src/pages/500/server-error"
+@import "src/pages/404/client-error.sass"
+@import "src/pages/profile/profile.sass"
 
 html
   font-family: "Inter", serif
@@ -16,3 +14,7 @@ html
 body, p
   margin: 0
   box-sizing: border-box
+
+button
+  &:hover
+    cursor: pointer
