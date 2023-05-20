@@ -34,8 +34,7 @@ registerComponent(DialogueMessage);
 (window as any).store = store;
 
 window.addEventListener("DOMContentLoaded", async () => {
-  Router
-    .use("/", loginPage)
+  Router.use("/", loginPage)
     .use("/login", loginPage)
     .use("/signup", RegisterPage)
     .use("/settings", ProfilePage)
@@ -44,7 +43,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     .use("/chats", ChatsPage)
     .use("/not-found", ClientErrorPage)
     .use("/server-error", ServerErrorPage);
-  
+
   try {
     const userInfo = await AuthController.fetchUser();
     Router.start();
@@ -57,9 +56,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         Router.go("/");
       }
     }
-    
   } catch (e) {
     Router.start();
   }
 });
-

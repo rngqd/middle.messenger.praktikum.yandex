@@ -18,11 +18,11 @@ function validateLogin(login: string): string {
   if (!login) {
     return "Укажите логин";
   }
-  
+
   if (login.length < 3 || login.length > 20) {
     return "Логин должен содержать от 3 до 20 символов";
   }
-  
+
   if (containsSpecialChars(login)) {
     return "Логин не должен содержать спецсимволов";
   } else {
@@ -34,7 +34,7 @@ function validatePassword(password: string): string {
   if (!password) {
     return "Укажите пароль";
   }
-  
+
   if (password.length < 8 || password.length > 40) {
     return "Пароль должен иметь длину от 8 до 40 символов";
   }
@@ -60,11 +60,11 @@ function validateName(name: string): string {
   if (!name) {
     return "Укажите свое Имя";
   }
-  
+
   if (!startWithUpper(name)) {
     return "Имя должно начинаться с заглавной буквы";
   }
-  
+
   if (containsSpecialChars(name)) {
     return "Спецсимволы не допустимы";
   } else {
@@ -76,11 +76,11 @@ function validateSoName(soName: string): string {
   if (!soName) {
     return "Укажите свою Фамилию";
   }
-  
+
   if (!startWithUpper(soName)) {
     return "Фамилию должна начинаться с заглавной буквы";
   }
-  
+
   if (containsSpecialChars(soName)) {
     return "Спецсимволы не допустимы";
   } else {
@@ -90,11 +90,11 @@ function validateSoName(soName: string): string {
 
 function validatePhone(phone: string): string {
   const phoneRegex = /^[0-9\-\+]{9,15}$/;
-  
+
   if (!phone) {
     return "Укажите номер";
   }
-  
+
   if (!phoneRegex.test(phone)) {
     return "Неверный формат номера";
   } else {
@@ -129,54 +129,54 @@ export function validateInput(data: IInputData): string {
     phone,
     oldPassword,
     newPassword,
-    repeatNewPassword
+    repeatNewPassword,
   } = data;
-  
+
   let error = "";
   if (email || email === "") {
     error = validateEmail(email);
   }
-  
+
   if (login || login === "") {
     error = validateLogin(login);
   }
-  
+
   if (display_name || display_name === "") {
     error = validateName(display_name);
   }
-  
+
   if (password || password === "") {
     error = validatePassword(password);
   }
-  
+
   if (oldPassword || oldPassword === "") {
     error = validatePassword(oldPassword);
   }
-  
+
   if (newPassword || newPassword === "") {
     error = validatePassword(newPassword);
   }
-  
+
   if (repeatNewPassword || repeatNewPassword === "") {
     error = validatePassword(repeatNewPassword);
   }
-  
+
   // if ((password || password === "") && (repeat_password || repeat_password === "")) {
   //  error = comparePassword(password, repeat_password);
   // }
-  
+
   if (first_name || first_name === "") {
     error = validateName(first_name);
   }
-  
+
   if (second_name || second_name === "") {
     error = validateSoName(second_name);
   }
-  
+
   if (phone || phone === "") {
     error = validatePhone(phone);
   }
-  
+
   return error;
 }
 
@@ -190,13 +190,13 @@ export function validateForm(formClass: string) {
       errorCount++;
     }
   });
-  
+
   inputs?.forEach(input => {
     if (!input.value || input.value === "") {
       errorCount++;
     }
   });
-  
+
   if (errorCount === 0) {
     return true;
   } else {
@@ -206,9 +206,9 @@ export function validateForm(formClass: string) {
 }
 
 export function validateRepeatPassword(pass: string, repeatPass: string) {
-    if (pass === repeatPass) {
-      return true
-    } else {
-      return "Новые пароль не совпадает"
-    }
+  if (pass === repeatPass) {
+    return true;
+  } else {
+    return "Новые пароль не совпадает";
+  }
 }

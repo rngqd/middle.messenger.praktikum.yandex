@@ -1,7 +1,6 @@
 import Block from "../../core/Block";
 
-
-import './input.sass';
+import "./input.sass";
 
 interface InputErrorProps {
   error?: string;
@@ -9,11 +8,11 @@ interface InputErrorProps {
 
 export class InputError extends Block {
   static componentName = "InputError";
-  
+
   constructor(props: InputErrorProps) {
     super(props);
   }
-  
+
   protected render(): string {
     // language=hbs
     return `

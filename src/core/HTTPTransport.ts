@@ -1,95 +1,95 @@
-import { queryStringify } from "../utils/functions";
-import { API_URL } from "../utils/constants";
+import {queryStringify} from "../utils/functions";
+import {API_URL} from "../utils/constants";
 
 enum METHODS {
- GET= "GET",
- POST = "POST",
- PUT = "PUT",
- DELETE = "DELETE",
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
 }
 
 interface Options {
- method?: keyof typeof METHODS;
- data?: any;
- headers?: Record<string, string>;
- withCredentials?: boolean
+  method?: keyof typeof METHODS;
+  data?: any;
+  headers?: Record<string, string>;
+  withCredentials?: boolean;
 }
 
-type HTTPRequest = (url: string, options?: Options) => Promise<any>
+type HTTPRequest = (url: string, options?: Options) => Promise<any>;
 
 export default class HTTPTransport {
- static API_URL = API_URL
- protected url: string
- 
- constructor(endpoint: string) {
-  this.url = `${HTTPTransport.API_URL}${endpoint}`
- }
- 
- get: HTTPRequest = (url: string, options: Options = {}) => {
-  const parsedUrl = !!options.data ? `${url}${queryStringify(options.data)}` : url
-  return this.request(parsedUrl, {...options });
- };
+  static API_URL = API_URL;
+  protected url: string;
 
- post: HTTPRequest = (url: string, options: Options = {}) => {
-  return this.request(url, {...options, method: METHODS.POST});
- };
+  constructor(endpoint: string) {
+    this.url = `${HTTPTransport.API_URL}${endpoint}`;
+  }
 
- put: HTTPRequest = (url: string, options: Options = {}) => {
-  return this.request(url, {...options, method: METHODS.PUT});
- };
+  get: HTTPRequest = (url: string, options: Options = {}) => {
+    const parsedUrl = !!options.data ? `${url}${queryStringify(options.data)}` : url;
+    return this.request(parsedUrl, {...options});
+  };
 
- delete: HTTPRequest = (url: string, options: Options = {}) => {
-  return this.request(url, {...options, method: METHODS.DELETE});
- };
+  post: HTTPRequest = (url: string, options: Options = {}) => {
+    return this.request(url, {...options, method: METHODS.POST});
+  };
 
- request = (url: string, options: Options = {method: "GET"}) => {
-  const { headers = {}, method, data } = options;
-  
-  const isFormData = headers?.["Content-Type"] === "multipart/form-data"
-  
-  return new Promise((resolve, reject) => {
-   const xhr = new XMLHttpRequest();
-   xhr.open(method || METHODS.GET, `${this.url}${url}`);
-   
-   if(!isFormData) {
-    xhr.setRequestHeader("Content-Type", "application/json");
-   }
- 
-   if (headers) {
-    Object.entries(headers).forEach(([key, value]) => {
-     if (!isFormData) {
-      xhr.setRequestHeader(key, value);
-     }
-    })
-   }
- 
-   xhr.onreadystatechange = () => {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-     if (xhr.status < 400) {
-      resolve(xhr.response);
-     } else {
-      reject(xhr.response);
-     }
-    }
-   }
-   
-   xhr.onload = () => {
-    resolve(xhr);
-   };
+  put: HTTPRequest = (url: string, options: Options = {}) => {
+    return this.request(url, {...options, method: METHODS.PUT});
+  };
 
-   xhr.onabort = reject;
-   xhr.ontimeout = reject;
-   xhr.onerror = reject;
-   xhr.withCredentials = true
-   xhr.responseType = "json"
-   
-   if (!data || method === METHODS.GET) {
-    xhr.send();
-   } else if (isFormData){
-    xhr.send(data as XMLHttpRequestBodyInit);
-   } else {
-    xhr.send(JSON.stringify(data))
-   }
-  });
- };
+  delete: HTTPRequest = (url: string, options: Options = {}) => {
+    return this.request(url, {...options, method: METHODS.DELETE});
+  };
+
+  request = (url: string, options: Options = {method: "GET"}) => {
+    const {headers = {}, method, data} = options;
+
+    const isFormData = headers?.["Content-Type"] === "multipart/form-data";
+
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open(method || METHODS.GET, `${this.url}${url}`);
+
+      if (!isFormData) {
+        xhr.setRequestHeader("Content-Type", "application/json");
+      }
+
+      if (headers) {
+        Object.entries(headers).forEach(([key, value]) => {
+          if (!isFormData) {
+            xhr.setRequestHeader(key, value);
+          }
+        });
+      }
+
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status < 400) {
+            resolve(xhr.response);
+          } else {
+            reject(xhr.response);
+          }
+        }
+      };
+
+      xhr.onload = () => {
+        resolve(xhr);
+      };
+
+      xhr.onabort = reject;
+      xhr.ontimeout = reject;
+      xhr.onerror = reject;
+      xhr.withCredentials = true;
+      xhr.responseType = "json";
+
+      if (!data || method === METHODS.GET) {
+        xhr.send();
+      } else if (isFormData) {
+        xhr.send(data as XMLHttpRequestBodyInit);
+      } else {
+        xhr.send(JSON.stringify(data));
+      }
+    });
+  };
 }

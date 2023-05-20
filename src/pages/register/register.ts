@@ -1,30 +1,30 @@
 import Block from "../../core/Block";
-import AuthController from "../../api/auth/controller"
-import { returnFormData } from "../../utils/functions";
-import { validateForm } from "../../utils/validation";
+import AuthController from "../../api/auth/controller";
+import {returnFormData} from "../../utils/functions";
+import {validateForm} from "../../utils/validation";
 import {SignupData} from "../../models";
 
 export class RegisterPage extends Block {
- constructor() {
-  super();
-  this.setProps({
-   onRegister:(e: Event) => {
-    e.preventDefault()
-    if(!validateForm('.register-page__form')) {
-     return
-    }
- 
-    const formData = returnFormData('register-page__form')
-    if(formData) {
-     void AuthController.signup(formData as unknown as SignupData)
-    }
-   }
-  })
- }
- 
- protected render() {
-  // language=hbs
-  return `
+  constructor() {
+    super();
+    this.setProps({
+      onRegister: (e: Event) => {
+        e.preventDefault();
+        if (!validateForm(".register-page__form")) {
+          return;
+        }
+
+        const formData = returnFormData("register-page__form");
+        if (formData) {
+          void AuthController.signup(formData as unknown as SignupData);
+        }
+      },
+    });
+  }
+
+  protected render() {
+    // language=hbs
+    return `
            <main class="main register-page">
              <form class="register-page__form" id="register-page__form">
                  <p class="register-page__title">Зарегистрироваться</p>
@@ -90,5 +90,5 @@ export class RegisterPage extends Block {
              </form>
          </main>
     `;
- }
+  }
 }

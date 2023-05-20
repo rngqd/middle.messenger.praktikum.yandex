@@ -2,47 +2,46 @@ import {Block} from "../../../core";
 import {withUser} from "../profile";
 import UserController from "../../../api/user/controller";
 import AuthController from "../../../api/auth/controller";
-import { returnFormData } from "../../../utils/functions";
-import { validateForm } from "../../../utils/validation";
-import { EditProfileData} from "../../../models";
+import {returnFormData} from "../../../utils/functions";
+import {validateForm} from "../../../utils/validation";
+import {EditProfileData} from "../../../models";
 import Router from "../../../router";
-
 
 class ProfileEditPageBase extends Block {
   constructor(props: any) {
     super({...props});
     void AuthController.fetchUser();
     this.setProps({
-      userData:props,
+      userData: props,
       onClickBack: () => {
-        Router.back()
+        Router.back();
       },
       onEditAvatar: () => {
         this.refs.avatarModal.setProps({
-          isOpen: true
-        })
+          isOpen: true,
+        });
       },
-      onCloseEditAvatar: ()=> {
+      onCloseEditAvatar: () => {
         this.refs.avatarModal.setProps({
-          isOpen: false
-        })
+          isOpen: false,
+        });
       },
       onSaveData: async (e: Event) => {
         e.preventDefault();
-  
-        if(!validateForm('.profile-page__edit-form')) {
-          return
+
+        if (!validateForm(".profile-page__edit-form")) {
+          return;
         }
-  
-        const formData = returnFormData('profile-page__edit-form')
-        if(formData) {
-          await UserController.editProfile(formData as unknown as EditProfileData)
-          Router.go('/settings')
+
+        const formData = returnFormData("profile-page__edit-form");
+        if (formData) {
+          await UserController.editProfile(formData as unknown as EditProfileData);
+          Router.go("/settings");
         }
-      }
+      },
     });
   }
-  
+
   protected render(): string {
     // language=hbs
     return `
@@ -123,4 +122,4 @@ class ProfileEditPageBase extends Block {
 }
 
 const ProfileEditPage = withUser(ProfileEditPageBase);
-export default ProfileEditPage
+export default ProfileEditPage;

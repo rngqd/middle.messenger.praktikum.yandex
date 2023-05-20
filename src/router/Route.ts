@@ -1,13 +1,9 @@
-import {Block, renderDOM } from "../core";
+import {Block, renderDOM} from "../core";
 
 export default class Route {
   private block: Block | null = null;
 
-  constructor(
-    private pathname: string,
-    private readonly blockClass: typeof Block,
-    private readonly query: string
-  ) {}
+  constructor(private pathname: string, private readonly blockClass: typeof Block, private readonly query: string) {}
 
   navigate(pathname: string) {
     if (this.match(pathname)) {

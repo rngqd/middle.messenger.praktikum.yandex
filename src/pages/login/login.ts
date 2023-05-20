@@ -1,31 +1,30 @@
 import Block from "../../core/Block";
-import AuthController from "../../api/auth/controller"
-import { returnFormData } from "../../utils/functions";
-import { validateForm } from "../../utils/validation";
-import { LoginData } from "../../models";
+import AuthController from "../../api/auth/controller";
+import {returnFormData} from "../../utils/functions";
+import {validateForm} from "../../utils/validation";
+import {LoginData} from "../../models";
 
 export class LoginPage extends Block {
-   constructor(props: any) {
-    
+  constructor(props: any) {
     super({...props});
-     this.setProps({
-      onLogin:(e: Event) => {
-        e.preventDefault()
-        if(!validateForm('.login-page__form')) {
-          return
+    this.setProps({
+      onLogin: (e: Event) => {
+        e.preventDefault();
+        if (!validateForm(".login-page__form")) {
+          return;
         }
-        
-        const formData = returnFormData('login-page__form')
-        if(formData) {
-          void AuthController.signin(formData as unknown as LoginData)
+
+        const formData = returnFormData("login-page__form");
+        if (formData) {
+          void AuthController.signin(formData as unknown as LoginData);
         }
       },
-    })
-   }
-  
+    });
+  }
+
   protected render() {
-  // language=hbs
-  return `
+    // language=hbs
+    return `
         <main class="main login-page">
           <form class="login-page__form" id="login-page__form">
             <p class="login-page__title">Войти</p>
@@ -53,5 +52,5 @@ export class LoginPage extends Block {
           </form>
         </main>
     `;
- }
+  }
 }

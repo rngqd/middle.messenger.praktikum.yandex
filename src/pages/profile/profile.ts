@@ -1,33 +1,32 @@
 import Block from "../../core/Block";
 import AuthController from "../../api/auth/controller";
-import { withStore } from "../../store";
-import Router  from "../../router";
+import {withStore} from "../../store";
+import Router from "../../router";
 
 class ProfilePage extends Block {
-   constructor(props: any) {
+  constructor(props: any) {
     super({...props});
-    void AuthController.fetchUser()
+    void AuthController.fetchUser();
     this.setProps({
-     onLogout: () => {
-      void AuthController.logout()
-     },
-     onChangePassword: () => {
-      Router.go("/settings/edit-password")
-     },
-     onChangeData: () => {
-      Router.go("/settings/edit")
-     },
-     onClickBack: () => {
-      Router.back()
-     },
-     userData:props
-    })
-   }
+      onLogout: () => {
+        void AuthController.logout();
+      },
+      onChangePassword: () => {
+        Router.go("/settings/edit-password");
+      },
+      onChangeData: () => {
+        Router.go("/settings/edit");
+      },
+      onClickBack: () => {
+        Router.back();
+      },
+      userData: props,
+    });
+  }
 
- protected render() {
-
-  // language=hbs
-  return `
+  protected render() {
+    // language=hbs
+    return `
       <main class="profile-page">
           <div class="profile-page__container">
            {{{ Button
@@ -117,10 +116,9 @@ class ProfilePage extends Block {
           </div>
       </main>
     `;
- }
+  }
 }
 
-
-export const withUser = withStore((state) => ({ ...state.user }));
+export const withUser = withStore(state => ({...state.user}));
 
 export const ProfilePageWithStore = withUser(ProfilePage);

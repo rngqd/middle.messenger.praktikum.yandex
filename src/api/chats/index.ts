@@ -1,37 +1,37 @@
 import HTTPTransport from "../../core/HTTPTransport";
-import { ChatData } from "../../models";
+import {ChatData} from "../../models";
 
 export class ChatsAPI {
   protected http: HTTPTransport;
-  
+
   constructor() {
-    this.http = new HTTPTransport('/chats');
+    this.http = new HTTPTransport("/chats");
   }
-  
+
   getChat(): Promise<ChatData> {
-    return this.http.get('/', {});
+    return this.http.get("/", {});
   }
-  
+
   createChat(title: string) {
-    return this.http.post('/', { data: { title } });
+    return this.http.post("/", {data: {title}});
   }
-  
+
   deleteChat(id: number) {
-    return this.http.delete('/', { data: { chatId: id } });
+    return this.http.delete("/", {data: {chatId: id}});
   }
-  
-  addUserToChat(data: { users: number[], chatId: number }) {
-    return this.http.put('/users', { data });
+
+  addUserToChat(data: {users: number[]; chatId: number}) {
+    return this.http.put("/users", {data});
   }
-  
-  deleteUserFromChat(data: { users: number[], chatId: number }) {
-    return this.http.delete('/users', { data });
+
+  deleteUserFromChat(data: {users: number[]; chatId: number}) {
+    return this.http.delete("/users", {data});
   }
-  
-  getToken(chatId: number):Promise<{ token: string }> {
+
+  getToken(chatId: number): Promise<{token: string}> {
     return this.http.post(`/token/${chatId}`, {});
   }
   getChatUsers(id: number, data: ChatData): Promise<ChatData[]> {
-    return this.http.get(`/${id}/users`, { data });
+    return this.http.get(`/${id}/users`, {data});
   }
 }

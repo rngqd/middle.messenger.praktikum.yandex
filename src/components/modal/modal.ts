@@ -6,14 +6,14 @@ import "./modal.sass";
 import {ChatData} from "../../models";
 
 interface ModalProps {
-  isOpen?: boolean,
-  onClose?: () => void,
-  onClick?: () => void,
-  avatarMode?: boolean,
-  chatMode?:boolean,
-  dialogueAddMode?:boolean,
-  dialogueDeleteMode?:boolean,
-  dialogueID?: number
+  isOpen?: boolean;
+  onClose?: () => void;
+  onClick?: () => void;
+  avatarMode?: boolean;
+  chatMode?: boolean;
+  dialogueAddMode?: boolean;
+  dialogueDeleteMode?: boolean;
+  dialogueID?: number;
 }
 
 export class Modal extends Block {
@@ -21,18 +21,18 @@ export class Modal extends Block {
   constructor({onClose, onClick, ...props}: ModalProps) {
     super({onClose, onClick, ...props});
     this.setProps({
-      onChangeAvatar:() => {
+      onChangeAvatar: () => {
         const avatar = document.getElementById("modal__input-file") as HTMLInputElement;
-        const file = (avatar as any).files[0]
+        const file = (avatar as any).files[0];
         const formData = new FormData();
         if (avatar && file) {
           formData.append("avatar", (avatar as any).files[0]);
           void UserController.editAvatar(formData);
         }
       },
-      onCreateChat:() => {
+      onCreateChat: () => {
         const data = returnFormData("modal__form");
-        if(data?.chats) {
+        if (data?.chats) {
           void ChatController.createChat(data.chats as string);
         }
       },
@@ -43,15 +43,15 @@ export class Modal extends Block {
         const userId = document.getElementById("modal__input-add") as HTMLInputElement;
         await ChatController.addUser({users: [+userId.value], chatId: this.props.dialogueID});
         await ChatController.getChatUsers(this.props.dialogueID, {} as ChatData);
-    },
+      },
       onDeleteUser: async () => {
         const userId = document.getElementById("modal__input-delete") as HTMLInputElement;
         await ChatController.deleteUser({users: [+userId.value], chatId: this.props.dialogueID});
         await ChatController.getChatUsers(this.props.dialogueID, {} as ChatData);
-      }
-    })
+      },
+    });
   }
-  
+
   protected render(): string {
     // language=hbs
     return `

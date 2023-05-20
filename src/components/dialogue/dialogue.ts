@@ -7,36 +7,36 @@ import {RESOURCE_URL} from "../../utils/constants";
 import store from "../../store";
 import {ChatData} from "../../models";
 interface DialogueProps {
-  avatar?:string,
-  title?: string,
-  activeChatId?: number,
-  messages?: string[]
+  avatar?: string;
+  title?: string;
+  activeChatId?: number;
+  messages?: string[];
 }
 
-export class Dialogue extends Block{
+export class Dialogue extends Block {
   static componentName = "Dialogue";
   constructor(props: DialogueProps) {
-    super(props)
+    super(props);
     this.setProps({
       onDeleteChat: async () => {
         await ChatController.deleteChat(this.props.activeChatId);
-        store.set("activeChat", null)
+        store.set("activeChat", null);
       },
       onAddUserModal: async () => {
         this.refs.dialogueAddModal.setProps({
-          isOpen: true
-        })
+          isOpen: true,
+        });
       },
       onDeleteUserModal: async () => {
         this.refs.dialogueDeleteModal.setProps({
-          isOpen: true
-        })
+          isOpen: true,
+        });
       },
       onSendMessage: () => {
         const input = document.getElementById("message") as HTMLInputElement;
         if (input) {
           const value = input.value;
-  
+
           MessageSocket.sendMessage(value);
         }
       },
@@ -48,18 +48,18 @@ export class Dialogue extends Block{
         await ChatController.deleteUser({users: userId, chatId: this.props.activeChatId});
         await ChatController.getChatUsers(this.props.activeChatId, {} as ChatData);
       },
-      onCloseModal: ()=> {
+      onCloseModal: () => {
         this.refs.dialogueAddModal.setProps({
-          isOpen: false
-        })
+          isOpen: false,
+        });
         this.refs.dialogueDeleteModal.setProps({
-          isOpen: false
-        })
+          isOpen: false,
+        });
       },
-    })
-    console.log(this.props)
+    });
+    console.log(this.props);
   }
-  
+
   protected render(): string {
     // language=hbs
     return `
@@ -110,6 +110,6 @@ export class Dialogue extends Block{
                         dialogueID=activeChatId
                 }}}
             </div>
-        `
+        `;
   }
 }

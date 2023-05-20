@@ -2,39 +2,42 @@ import Block from "./Block";
 import Handlebars, {HelperOptions} from "handlebars";
 
 interface BlockConstructable<Props = any> {
- new (props: Props): Block;
- componentName: string;
+  new (props: Props): Block;
+  componentName: string;
 }
 
 export default function registerComponent<Props extends any>(Component: BlockConstructable<Props>) {
- Handlebars.registerHelper(Component.componentName || Component.name, function (this: Props, {hash: {ref, ...hash}, data, fn}: HelperOptions) {
-  if (!data.root.children) {
-   data.root.children = {};
-  }
+  Handlebars.registerHelper(
+    Component.componentName || Component.name,
+    function (this: Props, {hash: {ref, ...hash}, data, fn}: HelperOptions) {
+      if (!data.root.children) {
+        data.root.children = {};
+      }
 
-  if (!data.root.refs) {
-   data.root.refs = {};
-  }
+      if (!data.root.refs) {
+        data.root.refs = {};
+      }
 
-  const {children, refs} = data.root;
-  
-  (Object.keys(hash) as any).forEach((key: keyof Props) => {
-   if (this[key] && typeof this[key] === "string") {
-    hash[key] = hash[key].replace(new RegExp(`{{${String(key)}}}`, "i"), this[key]);
-   }
-  });
+      const {children, refs} = data.root;
 
-  const component = new Component(hash);
+      (Object.keys(hash) as any).forEach((key: keyof Props) => {
+        if (this[key] && typeof this[key] === "string") {
+          hash[key] = hash[key].replace(new RegExp(`{{${String(key)}}}`, "i"), this[key]);
+        }
+      });
 
-  children[component.id] = component;
+      const component = new Component(hash);
 
-  if (ref) {
-   // refs[ref] = component.getContent();
-   refs[ref] = component;
-  }
+      children[component.id] = component;
 
-  const contents = fn ? fn(this) : "";
+      if (ref) {
+        // refs[ref] = component.getContent();
+        refs[ref] = component;
+      }
 
-  return `<div data-id="${component.id}">${contents}</div>`;
- });
+      const contents = fn ? fn(this) : "";
+
+      return `<div data-id="${component.id}">${contents}</div>`;
+    },
+  );
 }

@@ -1,12 +1,12 @@
 import Block from "../../core/Block";
-import "./avatar.sass"
+import "./avatar.sass";
 import avatarImg from "../../../static/img/avatar.jpeg";
-import { RESOURCE_URL } from "../../utils/constants";
+import {RESOURCE_URL} from "../../utils/constants";
 import "./avatar.sass";
 
 interface AvatarProps {
   src: string;
-  isEdit: boolean
+  isEdit: boolean;
   onClick?: () => void;
 }
 
@@ -14,9 +14,8 @@ export class Avatar extends Block {
   static componentName = "Avatar";
   constructor({onClick, ...props}: AvatarProps) {
     super({...props, events: {click: onClick}});
-    
   }
-  
+
   protected render(): string {
     // language=hbs
     return `

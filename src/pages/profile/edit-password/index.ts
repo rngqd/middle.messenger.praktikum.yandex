@@ -2,10 +2,9 @@ import {Block} from "../../../core";
 import {withUser} from "../profile";
 import UserController from "../../../api/user/controller";
 import AuthController from "../../../api/auth/controller";
-import { returnFormData } from "../../../utils/functions";
-import { validateRepeatPassword } from "../../../utils/validation";
+import {returnFormData} from "../../../utils/functions";
+import {validateRepeatPassword} from "../../../utils/validation";
 import Router from "../../../router";
-
 
 class ProfileEditPasswordPageBase extends Block {
   constructor(props: any) {
@@ -13,35 +12,35 @@ class ProfileEditPasswordPageBase extends Block {
     void AuthController.fetchUser();
     const setErrorMessage = (message: string) => {
       this.setProps({
-        message: message
-      })
-    }
+        message: message,
+      });
+    };
     this.setProps({
-      userData:props,
+      userData: props,
       onClickBack: () => {
-        Router.back()
+        Router.back();
       },
-   
+
       onChangePassword: async (e: Event) => {
         e.preventDefault();
-  
-        const formData = returnFormData('profile-page__edit-pass-form') as Record<string, string>
-        const validInfo = validateRepeatPassword( formData.newPassword, formData.repeatNewPassword )
-        if(formData) {
-          if(validInfo !== true) {
-            setErrorMessage(validInfo)
+
+        const formData = returnFormData("profile-page__edit-pass-form") as Record<string, string>;
+        const validInfo = validateRepeatPassword(formData.newPassword, formData.repeatNewPassword);
+        if (formData) {
+          if (validInfo !== true) {
+            setErrorMessage(validInfo);
           } else {
             await UserController.editPassword({
               oldPassword: formData.oldPassword,
-              newPassword: formData.newPassword
-            })
-            Router.go('/settings')
+              newPassword: formData.newPassword,
+            });
+            Router.go("/settings");
           }
         }
-      }
+      },
     });
   }
-  
+
   protected render(): string {
     // language=hbs
     return `
@@ -94,4 +93,4 @@ class ProfileEditPasswordPageBase extends Block {
 }
 
 const ProfileEditPasswordPage = withUser(ProfileEditPasswordPageBase);
-export default ProfileEditPasswordPage
+export default ProfileEditPasswordPage;
