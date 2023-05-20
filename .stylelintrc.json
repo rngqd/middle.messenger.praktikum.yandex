@@ -1,7 +1,14 @@
 {
   "extends": "stylelint-config-sass-guidelines",
   "rules": {
-    "indentation": 0,
-    "number-leading-zero": null
+    "block-opening-brace-space-before": "always",
+    "declaration-block-semicolon-newline-after": "always",
+    "color-hex-case": "lower",
+    "declaration-block-trailing-semicolon": "always",
+    "declaration-colon-space-after": "always",
+    "indentation": 2,
+    "max-empty-lines": 1,
+    "selector-class-pattern": null,
+    "no-descending-specificity": null
   }
 }
