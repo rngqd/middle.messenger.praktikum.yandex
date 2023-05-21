@@ -63,37 +63,37 @@ export class Dialogue extends Block {
   protected render(): string {
     // language=hbs
     return `
-            <div class="chats-page__chat">
-                <div class="chats-page__header">
-                    <div class="chats-page__header-container">
-                        <img class="chats-page__header-avatar"
+            <div class="dialogue">
+                <div class="dialogue__header">
+                    <div class="dialogue__header-container">
+                        <img class="dialogue__header-avatar"
                             {{#if avatar}}
                               src="${RESOURCE_URL}{{src}}"
                             {{else}}
                               src=${avatarImg}
                             {{/if}}
                              alt="chat-avatar">
-                        <span class="chats-page__header-name">{{title}}</p>
+                        <span class="dialogue__header-name">{{title}}</p>
                     </div>
                    {{{Button title="Удалить чат" onClick=onDeleteChat}}}
                    {{{Button title="Добавить пользователя" onClick=onAddUserModal}}}
                    {{{Button title="Удалить пользователя"  onClick=onDeleteUserModal}}}
                 </div>
-                <div class="chats-page__content">
+                <div class="dialogue__content">
                     {{#each messages}}
                         {{{DialogueMessage content=content userId=user_id}}}
                     {{/each}}
                 </div>
-                <div class="chats-page__footer">
-                    <button class="chats-page__footer-clip"></button>
+                <div class="dialogue__footer">
+                    <button class="dialogue__footer-clip"></button>
                     {{{Input
                                       type="text"
                                       name="message"
                                       id="message"
-                                      className="chats-page__footer-input"
+                                      className="dialogue__footer-input"
                                       placeholder="Сообщение"
                     }}}
-                    {{{Button className="chats-page__footer-send" onClick=onSendMessage}}}
+                    {{{Button className="dialogue__footer-send" onClick=onSendMessage}}}
                 </div>
                 {{{Modal
                         isOpen=isOpen
