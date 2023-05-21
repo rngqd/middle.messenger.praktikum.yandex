@@ -2,6 +2,11 @@
   "name": "middle.messenger.praktikum.yandex",
   "version": "1.0.0",
   "description": "",
+  "targets": {
+    "default": {
+      "sourceMap": false
+    }
+  },
   "scripts": {
     "dev": "parcel src/index.html src/**/*.html --no-cache",
     "build": "parcel build src/index.html src/pages/**/*.html  --no-cache",
