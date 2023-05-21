@@ -3,9 +3,5 @@
   "rules": {
     "selector-max-compound-selectors": 4,
     "declaration-property-value-no-unknown": true,
-    "at-rule-no-unknown": true
-  },
-  "ignoreFiles": [
-    "**/variables.sass"
-  ]
+  }
 }
