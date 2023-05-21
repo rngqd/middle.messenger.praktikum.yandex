@@ -1,3 +1,5 @@
+@import "src/styles/variables.sass"
+
 .avatar-container
   position: relative
   height: 130px
@@ -7,7 +9,6 @@
   margin: 0 auto 27px
   &:hover .avatar
     opacity: 0.8
-
 
   &:hover .avatar-overlay
     display: block
@@ -24,7 +25,7 @@
   border-radius: 50%
   &:hover
     cursor: pointer
-    background-color: #3F5080
+    background-color: $main
 
 .avatar-overlay
   position: absolute
