@@ -31,8 +31,9 @@ export class Input extends Block {
                   name="{{name}}"
                   value="{{value}}"
                   role="presentation"
-                  placeholder={{placeholder}}
                   {{#if isDisable}}disabled{{/if}}
+                  placeholder={{placeholder}}
+                 
            >
         `;
   }

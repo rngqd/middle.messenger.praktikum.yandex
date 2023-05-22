@@ -7,6 +7,7 @@ import {ChatData} from "../../models";
 
 import "./chat.sass";
 import {RESOURCE_URL} from "../../utils/constants";
+import {formatDate} from "../../utils/functions";
 
 interface ChatProps {
   avatar?: string;
@@ -22,12 +23,13 @@ interface ChatProps {
 export class ChatBase extends Block {
   static componentName = "Chat";
   constructor({onClick, ...props}: ChatProps) {
+  
     super({...props, events: {click: (e: Event) => this.onSelectChat(e)}});
     this.setProps({
+      time: this.props.time ? formatDate(this.props.time) : "",
       isActiveChat: this.props.id === this.props.activeChat,
     });
   }
-
   async onSelectChat(e: Event) {
     const target = e.currentTarget as HTMLDivElement;
 
@@ -47,13 +49,7 @@ export class ChatBase extends Block {
     // language=hbs
     return `
             <div class="chat {{#if isActiveChat}} chat_selected{{/if}}" id="{{id}}">
-                <img class="chat__avatar"  alt="avatar"
-                     {{#if avatar}}
-                     src="${RESOURCE_URL}{{src}}"
-                      {{else}}
-                      src=${avatarImg}
-                     {{/if}}
-                >
+                <img class="chat__avatar"  alt="avatar" src=${avatarImg}>
                 <div class="chat__container chat__container_text">
                     <p class="chat__profile-name">{{name}}</p>
                     <p class="chat__message">{{message}}</p>

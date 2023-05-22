@@ -31,5 +31,5 @@
 
 - «[Макет figma](https://www.figma.com/file/LJ4O0eIpEidkU9FGOBsBSu/Chat_external_link-Copy)»,
 - «[PR sprint 1](https://github.com/kronos2033/middle.messenger.praktikum.yandex/pull/1)»,
-- «[Проект на Netlify](https://resilient-lollipop-5cc7f4.netlify.app/)»,
-- https://resilient-lollipop-5cc7f4.netlify.app/
+- «[Проект на Netlify](https://lovely-lamington-e450cf.netlify.app/)»,
+- https://lovely-lamington-e450cf.netlify.app/

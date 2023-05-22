@@ -15,7 +15,6 @@ interface InputContainerProps {
 
 export class InputContainer extends Block {
   static componentName = "InputContainer";
-
   constructor(props: InputContainerProps) {
     const onBlur = (e: Event) => {
       const target = e.target as HTMLInputElement;

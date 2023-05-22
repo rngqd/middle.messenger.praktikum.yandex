@@ -10,12 +10,12 @@ enum METHODS {
 
 interface Options {
   method?: keyof typeof METHODS;
-  data?: any;
+  data?: unknown;
   headers?: Record<string, string>;
   withCredentials?: boolean;
 }
 
-type HTTPRequest = (url: string, options?: Options) => Promise<any>;
+type HTTPRequest = (url: string, options?: Options) => Promise<unknown>;
 
 export default class HTTPTransport {
   static API_URL = API_URL;
@@ -25,20 +25,20 @@ export default class HTTPTransport {
     this.url = `${HTTPTransport.API_URL}${endpoint}`;
   }
 
-  get: HTTPRequest = (url: string, options: Options = {}) => {
-    const parsedUrl = !!options.data ? `${url}${queryStringify(options.data)}` : url;
+  get: HTTPRequest = (url, options= {}) => {
+    const parsedUrl = options.data ? `${url}${queryStringify(options.data as Record<string, string>)}` : url;
     return this.request(parsedUrl, {...options});
   };
 
-  post: HTTPRequest = (url: string, options: Options = {}) => {
+  post: HTTPRequest = (url, options = {}) => {
     return this.request(url, {...options, method: METHODS.POST});
   };
 
-  put: HTTPRequest = (url: string, options: Options = {}) => {
+  put: HTTPRequest = (url, options= {}) => {
     return this.request(url, {...options, method: METHODS.PUT});
   };
 
-  delete: HTTPRequest = (url: string, options: Options = {}) => {
+  delete: HTTPRequest = (url, options= {}) => {
     return this.request(url, {...options, method: METHODS.DELETE});
   };
 

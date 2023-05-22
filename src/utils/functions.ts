@@ -88,3 +88,13 @@ export function returnFormData(formId: string) {
     return Object.fromEntries(formData);
   }
 }
+function addZero(number: number) {
+  return number > 9 ? `${number}` : `0${number}`
+}
+export const formatDate = (date: Date): string => {
+  const parsedDate = new Date(date);
+  const hours = parsedDate.getHours();
+  const minutes = parsedDate.getMinutes();
+  
+  return `${addZero(hours)}:${addZero(minutes)}`
+}
