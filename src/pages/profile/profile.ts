@@ -4,8 +4,8 @@ import {withStore} from "../../store";
 import Router from "../../router";
 
 class ProfilePage extends Block {
-  constructor(props: any) {
-    super({...props});
+  constructor() {
+    super();
     void AuthController.fetchUser();
     this.setProps({
       onLogout: () => {
@@ -20,7 +20,6 @@ class ProfilePage extends Block {
       onClickBack: () => {
         Router.back();
       },
-      userData: props,
     });
   }
 
@@ -35,7 +34,7 @@ class ProfilePage extends Block {
            }}}
             
             
-            {{{Avatar src=userData.avatar isEdit=false}}}
+            {{{Avatar src=avatar isEdit=false}}}
               <form class="profile-page__form" autocomplete="off">
                   {{{ InputContainer
                            type="text"
@@ -43,7 +42,7 @@ class ProfilePage extends Block {
                            title="Почта"
                            id="email"
                            ref="email"
-                           value=userData.email
+                           value=email
                            onBlur=onBlur
                            isDisable=true
                   }}}
@@ -53,7 +52,7 @@ class ProfilePage extends Block {
                            title="Логин"
                            id="login"
                            ref="login"
-                           value=userData.login
+                           value=login
                            onBlur=onBlur
                            isDisable=true
                   }}}
@@ -63,7 +62,7 @@ class ProfilePage extends Block {
                            title="Имя"
                            id="first_name"
                            ref="first_name"
-                           value=userData.first_name
+                           value=first_name
                            onBlur=onBlur
                            isDisable=true
                   }}}
@@ -73,7 +72,7 @@ class ProfilePage extends Block {
                            title="Фамилия"
                            id="second_name"
                            ref="second_name"
-                           value=userData.second_name
+                           value=second_name
                            onBlur=onBlur
                            isDisable=true
                   }}}
@@ -83,7 +82,7 @@ class ProfilePage extends Block {
                            title="Имя в чате"
                            id="display_name"
                            ref="display_name"
-                           value=userData.display_name
+                           value=display_name
                            onBlur=onBlur
                            isDisable=true
                   }}}
@@ -93,7 +92,7 @@ class ProfilePage extends Block {
                            title="Телефон"
                            id="phone"
                            ref="phone"
-                           value=userData.phone
+                           value=phone
                            onBlur=onBlur
                            isDisable=true
                   }}}

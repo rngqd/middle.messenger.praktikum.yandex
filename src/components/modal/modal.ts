@@ -21,13 +21,13 @@ export class Modal extends Block {
   constructor({onClose, onClick, ...props}: ModalProps) {
     super({onClose, onClick, ...props});
     this.setProps({
-      onChangeAvatar: () => {
+      onChangeAvatar: async () => {
         const avatar = document.getElementById("modal__input-file") as HTMLInputElement;
         const file = (avatar as any).files[0];
         const formData = new FormData();
         if (avatar && file) {
           formData.append("avatar", (avatar as any).files[0]);
-          void UserController.editAvatar(formData);
+          await UserController.editAvatar(formData);
         }
       },
       onCreateChat: () => {

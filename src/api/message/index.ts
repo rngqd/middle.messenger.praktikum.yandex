@@ -55,7 +55,12 @@ export class MessageSocket {
   };
 
   private readonly _handleMassage = (e: MessageEvent) => {
-    const data = JSON.parse(e.data);
+    let data
+    try {
+      data = JSON.parse(e.data);
+    } catch (e) {
+      data = undefined
+    }
 
     if (Array.isArray(data)) {
       if (!data.length) {

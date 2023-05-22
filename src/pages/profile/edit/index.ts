@@ -8,11 +8,10 @@ import {EditProfileData} from "../../../models";
 import Router from "../../../router";
 
 class ProfileEditPageBase extends Block {
-  constructor(props: any) {
-    super({...props});
+  constructor() {
+    super();
     void AuthController.fetchUser();
     this.setProps({
-      userData: props,
       onClickBack: () => {
         Router.back();
       },
@@ -53,7 +52,7 @@ class ProfileEditPageBase extends Block {
                         onClick=onClickBack
                 }}}
 
-                {{{Avatar src=userData.avatar isEdit=true onClick=onEditAvatar}}}
+                {{{Avatar src=avatar isEdit=true onClick=onEditAvatar}}}
                 <form class="profile-page__edit-form" id="profile-page__edit-form" autocomplete="off">
                     {{{ InputContainer
                             type="text"
@@ -61,7 +60,7 @@ class ProfileEditPageBase extends Block {
                             title="Почта"
                             id="email"
                             ref="email"
-                            value=userData.email
+                            value=email
                             onBlur=onBlur
                     }}}
                     {{{ InputContainer
@@ -70,7 +69,7 @@ class ProfileEditPageBase extends Block {
                             title="Логин"
                             id="login"
                             ref="login"
-                            value=userData.login
+                            value=login
                             onBlur=onBlur
                     }}}
                     {{{ InputContainer
@@ -79,7 +78,7 @@ class ProfileEditPageBase extends Block {
                             title="Имя"
                             id="first_name"
                             ref="first_name"
-                            value=userData.first_name
+                            value=first_name
                             onBlur=onBlur
                     }}}
                     {{{ InputContainer
@@ -88,7 +87,7 @@ class ProfileEditPageBase extends Block {
                             title="Фамилия"
                             id="second_name"
                             ref="second_name"
-                            value=userData.second_name
+                            value=second_name
                             onBlur=onBlur
                     }}}
                     {{{ InputContainer
@@ -97,7 +96,7 @@ class ProfileEditPageBase extends Block {
                             title="Имя в чате"
                             id="display_name"
                             ref="display_name"
-                            value=userData.display_name
+                            value=display_name
                             onBlur=onBlur
                     }}}
                     {{{ InputContainer
@@ -106,7 +105,7 @@ class ProfileEditPageBase extends Block {
                             title="Телефон"
                             id="phone"
                             ref="phone"
-                            value=userData.phone
+                            value=phone
                             onBlur=onBlur
                     }}}
                 </form>

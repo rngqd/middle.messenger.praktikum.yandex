@@ -23,8 +23,9 @@ export class UserController {
 
   async editPassword(data: EditProfilePassword) {
     try {
-      await this.api.editProfilePassword(data);
-
+     await this.api.editProfilePassword(data);
+    
+      // store.set("user", user);
       alert("Пароль обновлен!");
     } catch (e: any) {
       console.error(e.message);
@@ -33,8 +34,9 @@ export class UserController {
 
   async editAvatar(data: any) {
     try {
-      await this.api.editProfileAvatar(data);
-
+      const {avatar} = await this.api.editProfileAvatar(data);
+      const {user} = store.getState()
+      store.set("user", {...user, avatar})
       alert("Аватар обновлен!");
     } catch (e: any) {
       console.error(e.message);
