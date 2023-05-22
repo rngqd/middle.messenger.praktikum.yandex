@@ -2,6 +2,7 @@ import {AuthAPI} from "./index";
 import {LoginData, SignupData} from "../../models";
 import Router from "../../router";
 import store from "../../store";
+import { RouterPath } from "../../models/enums";
 
 class AuthController {
   private readonly api: AuthAPI;
@@ -14,7 +15,7 @@ class AuthController {
     try {
       await this.api.login(data);
 
-      Router.go("/chats");
+      Router.go(RouterPath.chats);
     } catch (e: any) {
       console.log(e.reason);
     }
@@ -25,7 +26,7 @@ class AuthController {
       await this.api.signup(data);
       await this.fetchUser();
 
-      Router.go("/chats");
+      Router.go(RouterPath.chats);
     } catch (e: any) {
       console.log(e.reason);
     }
@@ -44,7 +45,7 @@ class AuthController {
   async logout() {
     try {
       await this.api.logout();
-      Router.go("/login");
+      Router.go(RouterPath.login);
     } catch (e: any) {
       console.log(e.reason);
     }

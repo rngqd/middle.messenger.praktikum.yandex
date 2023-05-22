@@ -2,6 +2,7 @@ import Block from "../../core/Block";
 import {withStore} from "../../store";
 import ChatController from "../../api/chats/controller";
 import {ChatData} from "../../models";
+import {RouterPath} from "../../models/enums";
 
 export class ChatsPageBase extends Block {
   constructor(props: any) {
@@ -23,6 +24,7 @@ export class ChatsPageBase extends Block {
         });
       },
       activeChatTitle: title,
+      profileLink: RouterPath.profile
     });
   }
 
@@ -31,7 +33,7 @@ export class ChatsPageBase extends Block {
     return `
             <main class="main chats-page">
                 <div class="chats-page__container chats-page__container_left">
-                    <a class="chats-page__profile" href="/settings">Профиль</a>
+                    <a class="chats-page__profile" href="{{profileLink}}">Профиль</a>
                     {{{ InputContainer
                                       type="search"
                                       name="search"

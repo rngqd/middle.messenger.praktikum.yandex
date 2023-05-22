@@ -2,6 +2,7 @@ import {registerComponent} from "./core";
 import Router from "./router";
 import store from "./store";
 import AuthController from "./api/auth/controller";
+import { RouterPath } from "./models/enums";
 import "./styles/index.sass";
 import {unProtectedRedirects, protectedRedirects} from "./utils/constants";
 import loginPage from "./pages/login";
@@ -34,26 +35,26 @@ registerComponent(DialogueMessage);
 (window as any).store = store;
 
 window.addEventListener("DOMContentLoaded", async () => {
-  Router.use("/", loginPage)
-    .use("/login", loginPage)
-    .use("/signup", RegisterPage)
-    .use("/settings", ProfilePage)
-    .use("/settings/edit", ProfileEditPage)
-    .use("/settings/edit-password", ProfileEditPasswordPage)
-    .use("/chats", ChatsPage)
-    .use("/not-found", ClientErrorPage)
-    .use("/server-error", ServerErrorPage);
+  Router.use(RouterPath.default, loginPage)
+    .use(RouterPath.login, loginPage)
+    .use(RouterPath.register, RegisterPage)
+    .use(RouterPath.profile, ProfilePage)
+    .use(RouterPath.editProfile, ProfileEditPage)
+    .use(RouterPath.editProfilePassword, ProfileEditPasswordPage)
+    .use(RouterPath.chats, ChatsPage)
+    .use(RouterPath.clientError, ClientErrorPage)
+    .use(RouterPath.serverError, ServerErrorPage);
 
   try {
     const userInfo = await AuthController.fetchUser();
     Router.start();
     if (userInfo) {
       if (unProtectedRedirects.includes(window.location.pathname)) {
-        Router.go("/chats");
+        Router.go(RouterPath.chats);
       }
     } else {
       if (protectedRedirects.includes(window.location.pathname)) {
-        Router.go("/");
+        Router.go(RouterPath.default);
       }
     }
   } catch (e) {

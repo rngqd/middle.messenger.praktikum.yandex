@@ -3,6 +3,7 @@ import AuthController from "../../api/auth/controller";
 import {returnFormData} from "../../utils/functions";
 import {validateForm} from "../../utils/validation";
 import {LoginData} from "../../models";
+import { RouterPath } from "../../models/enums";
 
 export class LoginPage extends Block {
   constructor(props: any) {
@@ -19,6 +20,7 @@ export class LoginPage extends Block {
           void AuthController.signin(formData as unknown as LoginData);
         }
       },
+      registerLink: RouterPath.register
     });
   }
 
@@ -48,7 +50,7 @@ export class LoginPage extends Block {
                 onInput=onInput
             }}}
             {{{Button title="Войти" className="login-page__button" onClick=onLogin}}}
-            <a href="/signup" class="login-page__link">Ещё не зарегистрированы?</a>
+            <a href="{{registerLink}}" class="login-page__link">Ещё не зарегистрированы?</a>
           </form>
         </main>
     `;

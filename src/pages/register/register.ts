@@ -3,6 +3,7 @@ import AuthController from "../../api/auth/controller";
 import {returnFormData} from "../../utils/functions";
 import {validateForm} from "../../utils/validation";
 import {SignupData} from "../../models";
+import {RouterPath} from "../../models/enums";
 
 export class RegisterPage extends Block {
   constructor() {
@@ -19,6 +20,7 @@ export class RegisterPage extends Block {
           void AuthController.signup(formData as unknown as SignupData);
         }
       },
+      loginLink: RouterPath.login
     });
   }
 
@@ -86,7 +88,7 @@ export class RegisterPage extends Block {
                          onBlur=onBlur
                  }}}
                  {{{ Button title="Зарегистрироваться" className="register-page__button" onClick=onRegister}}}
-                 <a href="/" class="register-page__link">Войти</a>
+                 <a href="{{loginLink}}" class="register-page__link">Войти</a>
              </form>
          </main>
     `;
