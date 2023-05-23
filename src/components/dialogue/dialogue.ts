@@ -74,13 +74,9 @@ export class Dialogue extends Block {
                {{{Button title="Удалить пользователя"  onClick=onOpenDeleteModal}}}
             </div>
             <div class="dialogue__content">
-                {{#if messages.length}}
                     {{#each messages}}
                         {{{DialogueMessage content=content userId=user_id}}}
                     {{/each}}
-                {{else}}
-                <h2>loading</h2>
-                {{/if}}
             </div>
             <div class="dialogue__footer">
                 <button class="dialogue__footer-clip"></button>
