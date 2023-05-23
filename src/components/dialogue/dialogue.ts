@@ -57,7 +57,6 @@ export class Dialogue extends Block {
         });
       },
     });
-    console.log(this.props);
   }
 
   protected render(): string {

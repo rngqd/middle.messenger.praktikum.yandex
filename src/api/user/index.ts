@@ -8,7 +8,7 @@ export class UserAPI {
     this.http = new HTTPTransport("/user");
   }
 
-  getUser(id: string): Promise<User> {
+  getUser(id: string) {
     return this.http.get(`/${id}`, {});
   }
 

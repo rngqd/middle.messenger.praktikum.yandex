@@ -21,6 +21,7 @@ import Avatar from "./components/avatar";
 import Modal from "./components/modal";
 import Dialogue from "./components/dialogue";
 import DialogueMessage from "./components/dialogue/message";
+import Form from "./components/form";
 
 registerComponent(Button);
 registerComponent(Chat);
@@ -31,6 +32,7 @@ registerComponent(Avatar);
 registerComponent(Modal);
 registerComponent(Dialogue);
 registerComponent(DialogueMessage);
+registerComponent(Form);
 
 (window as any).store = store;
 

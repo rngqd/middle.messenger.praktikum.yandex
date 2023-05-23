@@ -3,7 +3,7 @@ import AuthController from "../../api/auth/controller";
 import {returnFormData} from "../../utils/functions";
 import {validateForm} from "../../utils/validation";
 import {LoginData} from "../../models";
-import { RouterPath } from "../../models/enums";
+import {RouterPath} from "../../models/enums";
 
 export class LoginPage extends Block {
   constructor(props: any) {
@@ -14,44 +14,44 @@ export class LoginPage extends Block {
         if (!validateForm(".login-page__form")) {
           return;
         }
-
+        
         const formData = returnFormData("login-page__form");
         if (formData) {
           void AuthController.signin(formData as unknown as LoginData);
         }
       },
-      registerLink: RouterPath.register
+      registerLink: RouterPath.register,
     });
   }
-
+  
   protected render() {
     // language=hbs
     return `
         <main class="main login-page">
-          <form class="login-page__form" id="login-page__form">
-            <p class="login-page__title">Войти</p>
-            {{{ InputContainer
-                type="text"
-                name="login"
-                title="Логин"
-                id="login"
-                ref="login"
-                onBlur=onBlur
-                onInput=onInput
-            }}}
-            {{{ InputContainer
-                type="password"
-                name="password"
-                title="Пароль"
-                id="password"
-                ref="password"
-                error=error
-                onBlur=onBlur
-                onInput=onInput
-            }}}
-            {{{Button title="Войти" className="login-page__button" onClick=onLogin}}}
-            <a href="{{registerLink}}" class="login-page__link">Ещё не зарегистрированы?</a>
-          </form>
+            {{#Form className="login-page__form" id="login-page__form" onSubmit=onLogin}}
+                <p class="login-page__title">Войти</p>
+                {{{ InputContainer
+                        type="text"
+                        name="login"
+                        title="Логин"
+                        id="login"
+                        ref="login"
+                        onBlur=onBlur
+                        onInput=onInput
+                }}}
+                {{{ InputContainer
+                        type="password"
+                        name="password"
+                        title="Пароль"
+                        id="password"
+                        ref="password"
+                        error=error
+                        onBlur=onBlur
+                        onInput=onInput
+                }}}
+                {{{Button title="Войти" className="login-page__button" type="submit"}}}
+                <a href="{{registerLink}}" class="login-page__link">Ещё не зарегистрированы?</a>
+            {{/Form}}
         </main>
     `;
   }

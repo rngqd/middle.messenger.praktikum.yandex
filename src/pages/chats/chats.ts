@@ -1,17 +1,11 @@
 import Block from "../../core/Block";
 import {withStore} from "../../store";
 import ChatController from "../../api/chats/controller";
-import {ChatData} from "../../models";
 import {RouterPath} from "../../models/enums";
-
 export class ChatsPageBase extends Block {
   constructor(props: any) {
     super(props);
     void ChatController.fetchChats();
-    const activeChat = (this.props.chats || []).find((chat: ChatData) => chat.id === this.props.activeChat);
-
-    const title = activeChat?.title;
-
     this.setProps({
       onOpenModal: () => {
         this.refs.chatModal.setProps({
@@ -23,8 +17,7 @@ export class ChatsPageBase extends Block {
           isOpen: false,
         });
       },
-      activeChatTitle: title,
-      profileLink: RouterPath.profile
+      profileLink: RouterPath.profile,
     });
   }
 
@@ -56,7 +49,7 @@ export class ChatsPageBase extends Block {
                 </div>
                 <div class="chats-page__container chats-page__container_right">
                 {{#if activeChat}}
-                    {{{Dialogue title=activeChatTitle activeChatId=activeChat messages=messages}}}
+                    {{{Dialogue title=activeChat.title activeChatId=activeChat.id messages=messages}}}
                 {{else}}
                     <div class="chats-page__select">
                         <h2 class="chats-page__title">Выберите чат</h2>

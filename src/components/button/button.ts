@@ -5,6 +5,7 @@ import "./button.sass";
 interface ButtonProps {
   title: string;
   className: string;
+  type: string;
   onClick: () => void;
 }
 
@@ -18,7 +19,7 @@ export class Button extends Block {
   protected render(): string {
     // language=hbs
     return `
-      <button class="button {{className}}" type="button"">
+      <button class="button {{className}}" type="{{type}}"">
         {{title}}
       </button>
     `;

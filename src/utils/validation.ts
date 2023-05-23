@@ -180,8 +180,8 @@ export function validateInput(data: IInputData): string {
   return error;
 }
 
-export function validateForm(formClass: string) {
-  const form = document.querySelector(formClass);
+export function validateForm(formId: string) {
+  const form = document.getElementById(formId);
   const inputs = form?.querySelectorAll(".input-container__input") as NodeListOf<HTMLInputElement>;
   const errors = form?.querySelectorAll(".input-container__error");
   let errorCount = 0;

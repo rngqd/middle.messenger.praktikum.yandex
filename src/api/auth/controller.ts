@@ -17,6 +17,7 @@ class AuthController {
 
       Router.go(RouterPath.chats);
     } catch (e: any) {
+      alert("Ошибка при входе")
       console.log(e.reason);
     }
   }
@@ -28,6 +29,7 @@ class AuthController {
 
       Router.go(RouterPath.chats);
     } catch (e: any) {
+      alert("Ошибка при регистрации")
       console.log(e.reason);
     }
   }

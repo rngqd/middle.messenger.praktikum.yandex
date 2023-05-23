@@ -15,7 +15,6 @@ interface ChatProps {
   message?: string;
   time: string;
   count?: number;
-  activeChat?: number;
   isAnswer: boolean;
   onClick: () => void;
 }
@@ -25,6 +24,7 @@ export class ChatBase extends Block {
   constructor({onClick, ...props}: ChatProps) {
   
     super({...props, events: {click: (e: Event) => this.onSelectChat(e)}});
+    console.log(props)
     this.setProps({
       time: this.props.time ? formatDate(this.props.time) : "",
       isActiveChat: this.props.id === this.props.activeChat,
@@ -34,7 +34,7 @@ export class ChatBase extends Block {
     const target = e.currentTarget as HTMLDivElement;
 
     const chatId = Number(target.id);
-
+    store.set("activeChat", {id: this.props.id, title: this.props.name});
     await ChatController.getChatUsers(chatId, {} as ChatData);
     const token = await ChatController.getChatToken(chatId);
 
@@ -49,7 +49,12 @@ export class ChatBase extends Block {
     // language=hbs
     return `
             <div class="chat {{#if isActiveChat}} chat_selected{{/if}}" id="{{id}}">
-                <img class="chat__avatar"  alt="avatar" src=${avatarImg}>
+                <img class="chat__avatar"  alt="avatar"
+                    {{#if avatar}}
+                     src="${RESOURCE_URL}{{avatar}}"
+                      {{else}}
+                      src=${avatarImg}
+                    {{/if}}>
                 <div class="chat__container chat__container_text">
                     <p class="chat__profile-name">{{name}}</p>
                     <p class="chat__message">{{message}}</p>

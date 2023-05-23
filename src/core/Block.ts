@@ -172,7 +172,7 @@ export default class Block<P extends Record<string, any> = any> {
       const content = component.getContent();
       stub.replaceWith(content);
 
-      const layoutContent = content.querySelector('[data-layout="1"]');
+      const layoutContent = content.querySelector('[data-layout="children"]');
 
       if (layoutContent && stubChilds.length) {
         layoutContent.append(...stubChilds);

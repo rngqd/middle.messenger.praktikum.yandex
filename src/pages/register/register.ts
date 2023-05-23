@@ -10,6 +10,7 @@ export class RegisterPage extends Block {
     super();
     this.setProps({
       onRegister: (e: Event) => {
+        console.log('register')
         e.preventDefault();
         if (!validateForm(".register-page__form")) {
           return;
@@ -27,8 +28,8 @@ export class RegisterPage extends Block {
   protected render() {
     // language=hbs
     return `
-           <main class="main register-page">
-             <form class="register-page__form" id="register-page__form">
+         <main class="main register-page">
+             {{#Form className="register-page__form" id="register-page__form" onSubmit=onRegister}}
                  <p class="register-page__title">Зарегистрироваться</p>
                  {{{ InputContainer
                          type="email"
@@ -87,10 +88,10 @@ export class RegisterPage extends Block {
                          ref="newPassword"
                          onBlur=onBlur
                  }}}
-                 {{{ Button title="Зарегистрироваться" className="register-page__button" onClick=onRegister}}}
+                 {{{ Button title="Зарегистрироваться" className="register-page__button" type="submit"}}}
                  <a href="{{loginLink}}" class="register-page__link">Войти</a>
-             </form>
-         </main>
+             {{/Form}}
+       </main>
     `;
   }
 }

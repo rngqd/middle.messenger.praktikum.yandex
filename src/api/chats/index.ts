@@ -8,7 +8,7 @@ export class ChatsAPI {
     this.http = new HTTPTransport("/chats");
   }
 
-  getChat(): Promise<ChatData> {
+  getChat(){
     return this.http.get("/", {});
   }
 
@@ -28,10 +28,10 @@ export class ChatsAPI {
     return this.http.delete("/users", {data});
   }
 
-  getToken(chatId: number): Promise<{token: string}> {
+  getToken(chatId: number) {
     return this.http.post(`/token/${chatId}`, {});
   }
-  getChatUsers(id: number, data: ChatData): Promise<ChatData[]> {
+  getChatUsers(id: number, data: ChatData) {
     return this.http.get(`/${id}/users`, {data});
   }
 }

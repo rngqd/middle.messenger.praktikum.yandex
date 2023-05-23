@@ -8,7 +8,7 @@ export class AuthAPI {
     this.http = new HTTPTransport("/auth");
   }
 
-  getUser(): Promise<User> {
+  getUser() {
     return this.http.get("/user", {});
   }
 
