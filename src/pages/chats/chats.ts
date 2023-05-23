@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import {withStore} from "../../store";
+import store, {withStore} from "../../store";
 import ChatController from "../../api/chats/controller";
 import {RouterPath} from "../../models/enums";
 import {returnFormData} from "../../utils/functions";
@@ -51,6 +51,7 @@ export class ChatsPageBase extends Block {
                     {{{Button title="Создать чат" className="chats-page__create" onClick=onOpenModal}}}
                 </div>
                 <div class="chats-page__container chats-page__container_right">
+                
                 {{#if activeChat}}
                     {{{Dialogue title=activeChat.title activeChatId=activeChat.id messages=messages}}}
                 {{else}}

@@ -42,7 +42,8 @@ export class Dialogue extends Block {
         await ChatController.deleteUser({users: [+userId.value], chatId: this.props.dialogueID});
         await ChatController.getChatUsers(this.props.dialogueID, {} as ChatData);
       },
-      onSendMessage: () => {
+      onSendMessage: (e: Event) => {
+        e.preventDefault()
         const input = document.getElementById("message") as HTMLInputElement;
         if (input) {
           const value = input.value;
@@ -56,79 +57,79 @@ export class Dialogue extends Block {
   protected render(): string {
     // language=hbs
     return `
-            <div class="dialogue">
-                <div class="dialogue__header">
-                    <div class="dialogue__header-container">
-                        <img class="dialogue__header-avatar"
-                            {{#if avatar}}
-                              src="${RESOURCE_URL}{{src}}"
-                            {{else}}
-                              src=${avatarImg}
-                            {{/if}}
-                             alt="chat-avatar">
-                        <span class="dialogue__header-name">{{title}}</p>
-                    </div>
-                   {{{Button title="Удалить чат" onClick=onDeleteChat}}}
-                   {{{Button title="Добавить пользователя" onClick=onOpenAddModal}}}
-                   {{{Button title="Удалить пользователя"  onClick=onOpenDeleteModal}}}
+        <div class="dialogue">
+            <div class="dialogue__header">
+                <div class="dialogue__header-container">
+                    <img class="dialogue__header-avatar"
+                        {{#if avatar}}
+                          src="${RESOURCE_URL}{{src}}"
+                        {{else}}
+                          src=${avatarImg}
+                        {{/if}}
+                         alt="chat-avatar">
+                    <span class="dialogue__header-name">{{title}}</p>
                 </div>
-                <div class="dialogue__content">
+               {{{Button title="Удалить чат" onClick=onDeleteChat}}}
+               {{{Button title="Добавить пользователя" onClick=onOpenAddModal}}}
+               {{{Button title="Удалить пользователя"  onClick=onOpenDeleteModal}}}
+            </div>
+            <div class="dialogue__content">
+                {{#if messages.length}}
                     {{#each messages}}
                         {{{DialogueMessage content=content userId=user_id}}}
                     {{/each}}
-                </div>
-                <div class="dialogue__footer">
-                    <button class="dialogue__footer-clip"></button>
-                    {{{Input
-                                      type="text"
-                                      name="message"
-                                      id="message"
-                                      className="dialogue__footer-input"
-                                      placeholder="Сообщение"
-                    }}}
-                    {{{Button className="dialogue__footer-send" onClick=onSendMessage}}}
-                </div>
-                {{#Modal className="modal_add-user"}}
-                    {{#Form onSubmit=onAddUser}}
-                        <h2 class="modal__title">ID пользователя</h2>
-                        {{{ InputContainer
-                                className="modal__input-chats"
-                                id="modal__input-add"
-                                type="text"
-                                name="add"
-                                id="add"
-                        }}}
-                        {{{Button
-                                className="modal__btn-change"
-                                title="Добавить пользователя"
-                                type="submit"
-                        }}}
-                    {{/Form}}
-                {{/Modal}}
-                {{#Modal className="modal_delete-user"}}
-                    {{#Form onSubmit=onDeleteUser}}
-                      <h2 class="modal__title">ID пользователя</h2>
-                      {{{ InputContainer
-                              className="modal__input-chats"
-                              id="modal__input-delete"
-                              type="text"
-                              name="delete"
-                              id="delete"
-                      }}}
-                      {{{Button
-                              className="modal__btn-change"
-                              title="Удалить пользователя"
-                              type="submit"
-                      }}}
-                    {{/Form}}
-                {{/Modal}}
-                
+                {{else}}
+                <h2>loading</h2>
+                {{/if}}
             </div>
-        `;
+            <div class="dialogue__footer">
+                <button class="dialogue__footer-clip"></button>
+                {{#Form onSubmit=onSendMessage className="dialogue__form"}}
+                {{{Input
+                                  type="text"
+                                  name="message"
+                                  id="message"
+                                  className="dialogue__footer-input"
+                                  placeholder="Сообщение"
+                }}}
+                {{{Button className="dialogue__footer-send" type="submit"}}}
+                {{/Form}}
+            </div>
+            {{#Modal className="modal_add-user"}}
+                {{#Form onSubmit=onAddUser}}
+                    <h2 class="modal__title">ID пользователя</h2>
+                    {{{ InputContainer
+                            className="modal__input-chats"
+                            id="modal__input-add"
+                            type="text"
+                            name="add"
+                            id="add"
+                    }}}
+                    {{{Button
+                            className="modal__btn-change"
+                            title="Добавить пользователя"
+                            type="submit"
+                    }}}
+                {{/Form}}
+            {{/Modal}}
+            {{#Modal className="modal_delete-user"}}
+                {{#Form onSubmit=onDeleteUser}}
+                  <h2 class="modal__title">ID пользователя</h2>
+                  {{{ InputContainer
+                          className="modal__input-chats"
+                          id="modal__input-delete"
+                          type="text"
+                          name="delete"
+                          id="delete"
+                  }}}
+                  {{{Button
+                          className="modal__btn-change"
+                          title="Удалить пользователя"
+                          type="submit"
+                  }}}
+                {{/Form}}
+            {{/Modal}}
+        </div>
+    `;
   }
 }
-// isOpen=isOpen
-// ref="dialogueAddModal"
-// onClose=onCloseModal
-// dialogueAddMode=true
-// dialogueID=activeChatId

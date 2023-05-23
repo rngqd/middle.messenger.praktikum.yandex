@@ -18,7 +18,7 @@ export class Form extends Block {
   protected render(): string {
     // language=hbs
     return `
-        <form id="{{id}}">
+        <form id="{{id}}" class="form">
             <div class="{{className}}" data-layout="children"></div>
         </form>
     `;

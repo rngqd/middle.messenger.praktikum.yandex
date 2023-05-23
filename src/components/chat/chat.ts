@@ -26,14 +26,14 @@ export class ChatBase extends Block {
     super({...props, events: {click: (e: Event) => this.onSelectChat(e)}});
     this.setProps({
       time: this.props.time ? formatDate(this.props.time) : "",
-      isActiveChat: this.props.id === this.props.activeChat,
+      isActiveChat: this.props.id === this.props.activeChat?.id,
     });
   }
   async onSelectChat(e: Event) {
-    const target = e.currentTarget as HTMLDivElement;
-
-    const chatId = Number(target.id);
     store.set("activeChat", {id: this.props.id, title: this.props.name});
+  
+    const target = e.currentTarget as HTMLDivElement;
+    const chatId = Number(target.id);
     await ChatController.getChatUsers(chatId, {} as ChatData);
     const token = await ChatController.getChatToken(chatId);
 

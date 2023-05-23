@@ -1,5 +1,5 @@
 import HTTPTransport from "../../core/HTTPTransport";
-import {LoginData, User, SignupData} from "../../models";
+import {LoginData, SignupData} from "../../models";
 
 export class AuthAPI {
   protected http: HTTPTransport;
