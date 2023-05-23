@@ -22,15 +22,25 @@ export class Dialogue extends Block {
         await ChatController.deleteChat(this.props.activeChatId);
         store.set("activeChat", null);
       },
-      onAddUserModal: async () => {
-        this.refs.dialogueAddModal.setProps({
-          isOpen: true,
-        });
+      onOpenAddModal: () => {
+        const modal = document.querySelector('.modal_add-user') as HTMLElement;
+        modal.classList.add('modal_visible')
       },
-      onDeleteUserModal: async () => {
-        this.refs.dialogueDeleteModal.setProps({
-          isOpen: true,
-        });
+      onAddUser: async (e: Event) => {
+        e.preventDefault()
+        const userId = document.getElementById("modal__input-add") as HTMLInputElement;
+        await ChatController.addUser({users: [+userId.value], chatId: this.props.dialogueID});
+        await ChatController.getChatUsers(this.props.dialogueID, {} as ChatData);
+      },
+      onOpenDeleteModal: () => {
+        const modal = document.querySelector('.modal_delete-user') as HTMLElement;
+        modal.classList.add('modal_visible')
+      },
+      onDeleteUser: async (e: Event) => {
+        e.preventDefault()
+        const userId = document.getElementById("modal__input-delete") as HTMLInputElement;
+        await ChatController.deleteUser({users: [+userId.value], chatId: this.props.dialogueID});
+        await ChatController.getChatUsers(this.props.dialogueID, {} as ChatData);
       },
       onSendMessage: () => {
         const input = document.getElementById("message") as HTMLInputElement;
@@ -39,22 +49,6 @@ export class Dialogue extends Block {
 
           MessageSocket.sendMessage(value);
         }
-      },
-      onAddUser: async (userId: number[]) => {
-        await ChatController.addUser({users: userId, chatId: this.props.activeChatId});
-        await ChatController.getChatUsers(this.props.activeChatId, {} as ChatData);
-      },
-      onDeleteUser: async (userId: number[]) => {
-        await ChatController.deleteUser({users: userId, chatId: this.props.activeChatId});
-        await ChatController.getChatUsers(this.props.activeChatId, {} as ChatData);
-      },
-      onCloseModal: () => {
-        this.refs.dialogueAddModal.setProps({
-          isOpen: false,
-        });
-        this.refs.dialogueDeleteModal.setProps({
-          isOpen: false,
-        });
       },
     });
   }
@@ -75,8 +69,8 @@ export class Dialogue extends Block {
                         <span class="dialogue__header-name">{{title}}</p>
                     </div>
                    {{{Button title="Удалить чат" onClick=onDeleteChat}}}
-                   {{{Button title="Добавить пользователя" onClick=onAddUserModal}}}
-                   {{{Button title="Удалить пользователя"  onClick=onDeleteUserModal}}}
+                   {{{Button title="Добавить пользователя" onClick=onOpenAddModal}}}
+                   {{{Button title="Удалить пользователя"  onClick=onOpenDeleteModal}}}
                 </div>
                 <div class="dialogue__content">
                     {{#each messages}}
@@ -94,21 +88,47 @@ export class Dialogue extends Block {
                     }}}
                     {{{Button className="dialogue__footer-send" onClick=onSendMessage}}}
                 </div>
-                {{{Modal
-                        isOpen=isOpen
-                        ref="dialogueDeleteModal"
-                        onClose=onCloseModal
-                        dialogueDeleteMode=true
-                        dialogueID=activeChatId
-                }}}
-                {{{Modal
-                        isOpen=isOpen
-                        ref="dialogueAddModal"
-                        onClose=onCloseModal
-                        dialogueAddMode=true
-                        dialogueID=activeChatId
-                }}}
+                {{#Modal className="modal_add-user"}}
+                    {{#Form onSubmit=onAddUser}}
+                        <h2 class="modal__title">ID пользователя</h2>
+                        {{{ InputContainer
+                                className="modal__input-chats"
+                                id="modal__input-add"
+                                type="text"
+                                name="add"
+                                id="add"
+                        }}}
+                        {{{Button
+                                className="modal__btn-change"
+                                title="Добавить пользователя"
+                                type="submit"
+                        }}}
+                    {{/Form}}
+                {{/Modal}}
+                {{#Modal className="modal_delete-user"}}
+                    {{#Form onSubmit=onDeleteUser}}
+                      <h2 class="modal__title">ID пользователя</h2>
+                      {{{ InputContainer
+                              className="modal__input-chats"
+                              id="modal__input-delete"
+                              type="text"
+                              name="delete"
+                              id="delete"
+                      }}}
+                      {{{Button
+                              className="modal__btn-change"
+                              title="Удалить пользователя"
+                              type="submit"
+                      }}}
+                    {{/Form}}
+                {{/Modal}}
+                
             </div>
         `;
   }
 }
+// isOpen=isOpen
+// ref="dialogueAddModal"
+// onClose=onCloseModal
+// dialogueAddMode=true
+// dialogueID=activeChatId

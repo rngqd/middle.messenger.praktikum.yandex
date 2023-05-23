@@ -24,7 +24,6 @@ export class ChatBase extends Block {
   constructor({onClick, ...props}: ChatProps) {
   
     super({...props, events: {click: (e: Event) => this.onSelectChat(e)}});
-    console.log(props)
     this.setProps({
       time: this.props.time ? formatDate(this.props.time) : "",
       isActiveChat: this.props.id === this.props.activeChat,

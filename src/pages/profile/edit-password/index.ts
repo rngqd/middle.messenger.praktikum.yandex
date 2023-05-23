@@ -5,6 +5,7 @@ import AuthController from "../../../api/auth/controller";
 import {returnFormData} from "../../../utils/functions";
 import {validateRepeatPassword} from "../../../utils/validation";
 import Router from "../../../router";
+import {RouterPath} from "../../../models/enums";
 
 class ProfileEditPasswordPageBase extends Block {
   constructor(props: any) {
@@ -34,7 +35,7 @@ class ProfileEditPasswordPageBase extends Block {
               oldPassword: formData.oldPassword,
               newPassword: formData.newPassword,
             });
-            Router.go("/settings");
+            Router.go(RouterPath.profile);
           }
         }
       },

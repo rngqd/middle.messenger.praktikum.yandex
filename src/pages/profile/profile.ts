@@ -2,6 +2,7 @@ import Block from "../../core/Block";
 import AuthController from "../../api/auth/controller";
 import {withStore} from "../../store";
 import Router from "../../router";
+import {RouterPath} from "../../models/enums";
 
 class ProfilePage extends Block {
   constructor() {
@@ -12,13 +13,13 @@ class ProfilePage extends Block {
         void AuthController.logout();
       },
       onChangePassword: () => {
-        Router.go("/settings/edit-password");
+        Router.go(RouterPath.editProfilePassword);
       },
       onChangeData: () => {
-        Router.go("/settings/edit");
+        Router.go(RouterPath.editProfile);
       },
       onClickBack: () => {
-        Router.back();
+        Router.go(RouterPath.chats);
       },
     });
   }

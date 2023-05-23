@@ -6,6 +6,7 @@ import {returnFormData} from "../../../utils/functions";
 import {validateForm} from "../../../utils/validation";
 import {EditProfileData} from "../../../models";
 import Router from "../../../router";
+import {RouterPath} from "../../../models/enums";
 
 class ProfileEditPageBase extends Block {
   constructor() {
@@ -16,14 +17,21 @@ class ProfileEditPageBase extends Block {
         Router.back();
       },
       onEditAvatar: () => {
-        this.refs.avatarModal.setProps({
-          isOpen: true,
-        });
+        const modal = document.querySelector('.modal') as HTMLElement;
+        modal.classList.add('modal_visible')
       },
-      onCloseEditAvatar: () => {
-        this.refs.avatarModal.setProps({
-          isOpen: false,
-        });
+      onBrowseFile: () => {
+        document.getElementById("modal__input-file")?.click();
+      },
+      onChangeAvatar: async (e: Event) => {
+        e.preventDefault();
+        const avatar = document.getElementById("modal__input-file") as HTMLInputElement;
+        const file = (avatar as any).files[0];
+        const formData = new FormData();
+        if (avatar && file) {
+          formData.append("avatar", (avatar as any).files[0]);
+          await UserController.editAvatar(formData);
+        }
       },
       onSaveData: async (e: Event) => {
         e.preventDefault();
@@ -35,7 +43,7 @@ class ProfileEditPageBase extends Block {
         const formData = returnFormData("profile-page__edit-form");
         if (formData) {
           await UserController.editProfile(formData as unknown as EditProfileData);
-          Router.go("/settings");
+          Router.go(RouterPath.profile);
         }
       },
     });
@@ -45,7 +53,6 @@ class ProfileEditPageBase extends Block {
     // language=hbs
     return `
         <main class="profile-page profile-page_edit">
-            {{{Modal isOpen=isOpen ref="avatarModal" onClose=onCloseEditAvatar avatarMode=true}}}
             <div class="profile-page__container">
                 {{{ Button
                         className="profile-page__back"
@@ -115,6 +122,30 @@ class ProfileEditPageBase extends Block {
                         onClick=onSaveData
                 }}}
             </div>
+            {{#Modal}}
+                {{#Form id="modal__form" onSubmit=onChangeAvatar}}
+                    <p class="modal__title">Загрузить файл</p>
+                    {{{ InputContainer
+                            className="modal__input-file"
+                            id="modal__input-file"
+                            type="file"
+                            name="avatar"
+                            id="avatar"
+                    }}}
+                    {{{ Button
+                            title="Выберите файл на компьютере"
+                            onClick=onBrowseFile
+                            className="modal__input-file_helper"
+                            type="button"
+                    }}}
+                    {{{ Button
+                            className="modal__btn-change"
+                            title="Изменить"
+                            type="submit"
+
+                    }}}
+                {{/Form}}
+            {{/Modal}}
         </main>
     `;
   }

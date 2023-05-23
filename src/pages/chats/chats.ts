@@ -2,20 +2,23 @@ import Block from "../../core/Block";
 import {withStore} from "../../store";
 import ChatController from "../../api/chats/controller";
 import {RouterPath} from "../../models/enums";
+import {returnFormData} from "../../utils/functions";
 export class ChatsPageBase extends Block {
   constructor(props: any) {
     super(props);
     void ChatController.fetchChats();
     this.setProps({
       onOpenModal: () => {
-        this.refs.chatModal.setProps({
-          isOpen: true,
-        });
+        const modal = document.querySelector('.modal_add-chat') as HTMLElement;
+        modal.classList.add('modal_visible')
       },
-      onCloseModal: () => {
-        this.refs.chatModal.setProps({
-          isOpen: false,
-        });
+      onCreateChat: (e: Event) => {
+        e.preventDefault();
+        const data = returnFormData("modal__form");
+        console.log(data);
+        if (data?.chats) {
+          void ChatController.createChat(data.chats as string);
+        }
       },
       profileLink: RouterPath.profile,
     });
@@ -56,7 +59,23 @@ export class ChatsPageBase extends Block {
                     </div>
                 {{/if}}
                 </div>
-                {{{Modal isOpen=isOpen ref="chatModal" onClose=onCloseModal chatMode=true}}}
+                {{#Modal className="modal_add-chat"}}
+                    {{#Form id="modal__form" onSubmit=onCreateChat}}
+                        <h2 class="modal__title">Создать чат</h2>
+                        {{{ InputContainer
+                                className="modal__input-chats"
+                                id="modal__input-text"
+                                type="text"
+                                name="chats"
+                                id="chats"
+                        }}}
+                        {{{Button
+                                className="modal__btn-change"
+                                title="Создать"
+                                type="submit"
+                        }}}
+                    {{/Form}}
+                {{/Modal}}
             </main>
         `;
   }
