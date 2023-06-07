@@ -1,9 +1,10 @@
 import Block from "../../core/Block";
 import Router from "../../router";
 interface LinkProps {
-  text: string;
-  className: string;
-  onClick: () => void;
+  text?: string;
+  className?: string;
+  href?: string
+  onClick?: () => void;
 }
 
 export class Link extends Block {

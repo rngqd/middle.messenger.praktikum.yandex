@@ -1,4 +1,4 @@
-import {IInputData, Indexed} from "../models";
+import {Indexed} from "../models";
 
 export function queryStringify(data: any) {
   if (typeof data !== "object") {
@@ -9,38 +9,6 @@ export function queryStringify(data: any) {
   return keys.reduce((result, key, index) => {
     return `${result}${key}=${data[key]}${index < keys.length - 1 ? "&" : ""}`;
   }, "?");
-}
-
-export function makeDataObject(data: IInputData, ref: {[p: string]: HTMLInputElement}) {
-  const copyData = {...data};
-  for (let key in copyData) {
-    const refValue = ref[key].value;
-
-    if (!!refValue || refValue === "") {
-      copyData[key as keyof typeof copyData] = refValue;
-    }
-  }
-  return copyData;
-}
-
-export function isEqual(object1: object, object2: object) {
-  const keys1 = Object.keys(object1);
-  const keys2 = Object.keys(object2);
-  if (keys1.length !== keys2.length) {
-    return false;
-  }
-  for (const key of keys1) {
-    const val1 = object1[key as keyof typeof object1];
-    const val2 = object2[key as keyof typeof object2];
-    const areObjects = isObject(val1) && isObject(val2);
-    if ((areObjects && !isEqual(val1, val2)) || (!areObjects && val1 !== val2)) {
-      return false;
-    }
-  }
-  return true;
-}
-function isObject(object: object) {
-  return object != null && typeof object === "object";
 }
 
 function merge(lhs: Indexed, rhs: Indexed): Indexed {
@@ -88,10 +56,9 @@ export function returnFormData(formId: string) {
     return Object.fromEntries(formData);
   }
 }
-function addZero(number: number) {
-  return number > 9 ? `${number}` : `0${number}`
-}
-export const formatDate = (date: Date): string => {
+
+export function formatDate (date: Date): string {
+  const addZero = (number: number) => number > 9 ? `${number}` : `0${number}`
   const parsedDate = new Date(date);
   const hours = parsedDate.getHours();
   const minutes = parsedDate.getMinutes();

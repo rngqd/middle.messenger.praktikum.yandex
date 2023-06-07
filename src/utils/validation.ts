@@ -45,17 +45,6 @@ function validatePassword(password: string): string {
   }
 }
 
-// function comparePassword(password: string, repeatPassword: string): string {
-//  if (!repeatPassword) {
-//   return "Укажите пароль ещё раз";
-//  }
-//  if (password !== repeatPassword) {
-//   return "Пароли не совпадают";
-//  } else {
-//   return "";
-//  }
-// }
-
 function validateName(name: string): string {
   if (!name) {
     return "Укажите свое Имя";
@@ -112,10 +101,6 @@ function validateEmail(email: string): string {
   } else {
     return "";
   }
-}
-
-export function validateMessage(message: string): string {
-  return !message ? "Введите сообщение" : "";
 }
 
 export function validateInput(data: IInputData): string {

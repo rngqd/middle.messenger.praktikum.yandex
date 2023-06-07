@@ -24,7 +24,7 @@ describe('Отправка запросов', () => {
   })
   
   
-  it('Проверка отправки GET запроса', () => {
+  it('Отправляется GET запрос', () => {
     instance.get("/user", {});
     
     const [request] = requests;
@@ -32,7 +32,7 @@ describe('Отправка запросов', () => {
     expect(request.method).to.eq("GET");
   })
   
-  it('Проверка отправки POST запроса', () => {
+  it('Отправляется POST запрос', () => {
     instance.post("/user", {});
     
     const [request] = requests;
@@ -40,7 +40,7 @@ describe('Отправка запросов', () => {
     expect(request.method).to.eq("POST");
   })
   
-  it('Проверка отправки PUT запроса', () => {
+  it('Отправляется PUT запрос', () => {
     instance.put("/user", {});
     
     const [request] = requests;
@@ -48,7 +48,7 @@ describe('Отправка запросов', () => {
     expect(request.method).to.eq("PUT");
   })
   
-  it('Проверка отправки DELETE запроса', () => {
+  it('Оправляется DELETE запрос', () => {
     instance.delete("/user", {});
     
     const [request] = requests;
