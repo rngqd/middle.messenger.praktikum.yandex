@@ -12,7 +12,7 @@ export class Modal extends Block {
     super(props);
     this.setProps({
       onCloseModal:()=> {
-        const modalSelector = `.${props.className}` || ".modal"
+        const modalSelector = `.${this.props.className}` || ".modal"
         const modal = document.querySelector(modalSelector) as HTMLElement
         modal.classList.remove('modal_visible')
       }

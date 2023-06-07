@@ -33,3 +33,9 @@
 - «[PR sprint 1](https://github.com/kronos2033/middle.messenger.praktikum.yandex/pull/1)»,
 - «[Проект на Netlify](https://lovely-lamington-e450cf.netlify.app/)»,
 - https://lovely-lamington-e450cf.netlify.app/
+## Sprint 4
+
+по умолчанию проект запускается на 3000 порту
+docker build -t <CONTAINER_NAME> .     
+docker run -p 8000:3000 -d <CONTAINER_NAME> 
+

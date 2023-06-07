@@ -14,7 +14,7 @@ export class ServerErrorPage extends Block {
             <main class="main server-error">
                 <h1 class="server-error__title">500</h1>
                 <p class="server-error__subtitle">Мы уже фиксим</p>
-                <a href="{{defaultLink}}" class="server-error__link">Вернуться назад</a>
+                {{{Link className="client-error__link" href=defaultLink text="Вернуться назад"}}}
             </main>
     `;
   }

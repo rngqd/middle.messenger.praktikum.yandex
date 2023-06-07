@@ -35,7 +35,7 @@ export class ChatBase extends Block {
     const target = e.currentTarget as HTMLDivElement;
     const chatId = Number(target.id);
     await ChatController.getChatUsers(chatId, {} as ChatData);
-    const token = await ChatController.getChatToken(chatId);
+    const token = await ChatController.getChatToken(chatId) as {token: string};
 
     if (token) {
       const userId = store.getState().user.id;
@@ -70,4 +70,4 @@ export class ChatBase extends Block {
 }
 export const withActiveChat = withStore(state => ({activeChat: state.activeChat}));
 
-export const Chat = withActiveChat(ChatBase);
+export const Chat = withActiveChat(ChatBase as typeof Block);

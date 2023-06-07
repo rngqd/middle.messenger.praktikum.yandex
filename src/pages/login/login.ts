@@ -50,7 +50,7 @@ export class LoginPage extends Block {
                         onInput=onInput
                 }}}
                 {{{Button title="Войти" className="login-page__button" type="submit"}}}
-                <a href="{{registerLink}}" class="login-page__link">Ещё не зарегистрированы?</a>
+                {{{Link className="login-page__link" href=registerLink text="Ещё не зарегистрированы?"}}}
             {{/Form}}
         </main>
     `;

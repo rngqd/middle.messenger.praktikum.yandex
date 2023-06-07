@@ -34,7 +34,7 @@ export class UserController {
 
   async editAvatar(data: any) {
     try {
-      const {avatar} = await this.api.editProfileAvatar(data);
+      const {avatar} = await this.api.editProfileAvatar(data) as {avatar: string};
       const {user} = store.getState()
       store.set("user", {...user, avatar})
       alert("Аватар обновлен!");

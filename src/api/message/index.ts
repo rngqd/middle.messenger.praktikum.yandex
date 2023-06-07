@@ -78,8 +78,8 @@ export class MessageSocket {
     }
   };
 
-  private readonly _handleError = (e: ErrorEvent) => {
-    console.log(e.message);
+  private readonly _handleError = (e: Event) => {
+      console.log(e);
   };
 
   private _reconnect() {

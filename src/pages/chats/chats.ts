@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import store, {withStore} from "../../store";
+import  {withStore} from "../../store";
 import ChatController from "../../api/chats/controller";
 import {RouterPath} from "../../models/enums";
 import {returnFormData} from "../../utils/functions";
@@ -29,7 +29,7 @@ export class ChatsPageBase extends Block {
     return `
             <main class="main chats-page">
                 <div class="chats-page__container chats-page__container_left">
-                    <a class="chats-page__profile" href="{{profileLink}}">Профиль</a>
+                    {{{Link className="chats-page__profile" href=profileLink text="Профиль" }}}
                     {{{ InputContainer
                                       type="search"
                                       name="search"
