@@ -10,7 +10,7 @@ export class RegisterPage extends Block {
     super();
     this.setProps({
       onRegister: (e: Event) => {
-        console.log('register')
+        console.log("register");
         e.preventDefault();
         if (!validateForm(".register-page__form")) {
           return;
@@ -21,7 +21,7 @@ export class RegisterPage extends Block {
           void AuthController.signup(formData as unknown as SignupData);
         }
       },
-      loginLink: RouterPath.login
+      loginLink: RouterPath.login,
     });
   }
 
@@ -89,7 +89,7 @@ export class RegisterPage extends Block {
                          onBlur=onBlur
                  }}}
                  {{{ Button title="Зарегистрироваться" className="register-page__button" type="submit"}}}
-                 <a href="{{loginLink}}" class="register-page__link">Войти</a>
+                 {{{Link className="register-page__link" href=loginLink text="Войти"}}}
              {{/Form}}
        </main>
     `;

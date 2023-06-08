@@ -2,7 +2,7 @@ import {AuthAPI} from "./index";
 import {LoginData, SignupData} from "../../models";
 import Router from "../../router";
 import store from "../../store";
-import { RouterPath } from "../../models/enums";
+import {RouterPath} from "../../models/enums";
 
 class AuthController {
   private readonly api: AuthAPI;
@@ -17,7 +17,7 @@ class AuthController {
 
       Router.go(RouterPath.chats);
     } catch (e: any) {
-      alert("Ошибка при входе")
+      alert("Ошибка при входе");
       console.log(e.reason);
     }
   }
@@ -29,7 +29,7 @@ class AuthController {
 
       Router.go(RouterPath.chats);
     } catch (e: any) {
-      alert("Ошибка при регистрации")
+      alert("Ошибка при регистрации");
       console.log(e.reason);
     }
   }

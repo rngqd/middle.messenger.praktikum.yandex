@@ -14,7 +14,7 @@ export class LoginPage extends Block {
         if (!validateForm(".login-page__form")) {
           return;
         }
-        
+
         const formData = returnFormData("login-page__form");
         if (formData) {
           void AuthController.signin(formData as unknown as LoginData);
@@ -23,7 +23,7 @@ export class LoginPage extends Block {
       registerLink: RouterPath.register,
     });
   }
-  
+
   protected render() {
     // language=hbs
     return `
@@ -50,7 +50,7 @@ export class LoginPage extends Block {
                         onInput=onInput
                 }}}
                 {{{Button title="Войти" className="login-page__button" type="submit"}}}
-                <a href="{{registerLink}}" class="login-page__link">Ещё не зарегистрированы?</a>
+                {{{Link className="login-page__link" href=registerLink text="Ещё не зарегистрированы?"}}}
             {{/Form}}
         </main>
     `;

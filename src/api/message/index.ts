@@ -55,11 +55,11 @@ export class MessageSocket {
   };
 
   private readonly _handleMassage = (e: MessageEvent) => {
-    let data
+    let data;
     try {
       data = JSON.parse(e.data);
     } catch (e) {
-      data = undefined
+      data = undefined;
     }
 
     if (Array.isArray(data)) {
@@ -78,8 +78,8 @@ export class MessageSocket {
     }
   };
 
-  private readonly _handleError = (e: ErrorEvent) => {
-    console.log(e.message);
+  private readonly _handleError = (e: Event) => {
+    console.log(e);
   };
 
   private _reconnect() {

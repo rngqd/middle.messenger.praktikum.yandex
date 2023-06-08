@@ -14,14 +14,14 @@ export default class Block<P extends Record<string, any> = any> {
 
   static componentName: string;
   public id = nanoid(6);
-  
+
   protected _element: Nullable<HTMLElement> = null;
   protected readonly props: P;
   protected children: {[id: string]: Block} = {};
   protected refs: {[key: string]: Block} = {};
 
   eventBus: () => EventBus<Events>;
-  
+
   public constructor(props?: P) {
     const eventBus = new EventBus<Events>();
     this.props = this._makePropsProxy(props || ({} as P));

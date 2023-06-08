@@ -2,7 +2,7 @@ import {registerComponent} from "./core";
 import Router from "./router";
 import store from "./store";
 import AuthController from "./api/auth/controller";
-import { RouterPath } from "./models/enums";
+import {RouterPath} from "./models/enums";
 import "./styles/index.sass";
 import {unProtectedRedirects, protectedRedirects} from "./utils/constants";
 import loginPage from "./pages/login";
@@ -22,6 +22,7 @@ import Modal from "./components/modal";
 import Dialogue from "./components/dialogue";
 import DialogueMessage from "./components/dialogue/message";
 import Form from "./components/form";
+import Link from "./components/link";
 
 registerComponent(Button);
 registerComponent(Chat);
@@ -33,6 +34,7 @@ registerComponent(Modal);
 registerComponent(Dialogue);
 registerComponent(DialogueMessage);
 registerComponent(Form);
+registerComponent(Link);
 
 (window as any).store = store;
 

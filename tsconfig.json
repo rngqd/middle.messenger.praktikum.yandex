@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
+    "strictPropertyInitialization": false,
     "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -15,7 +16,13 @@
     "strictNullChecks": true,
     "typeRoots": [
       "node_modules/@types",
-      "typings/app.d.ts"
-    ]
+      "./index.d.ts",
+    ],
+    "types": ["mocha", "node"]
+  },
+  "include": ["index.d.ts"],
+  "ts-node": {
+    "files": true
   }
 }
+

@@ -20,7 +20,7 @@ export class UserAPI {
     return this.http.put("/password", {data});
   }
 
-  editProfileAvatar(data: FormData){
+  editProfileAvatar(data: FormData) {
     return this.http.put("/profile/avatar", {
       data,
       headers: {"Content-Type": "multipart/form-data"},

@@ -25,7 +25,7 @@ export default class HTTPTransport {
     this.url = `${HTTPTransport.API_URL}${endpoint}`;
   }
 
-  get: HTTPRequest = (url, options= {}) => {
+  get: HTTPRequest = (url, options = {}) => {
     const parsedUrl = options.data ? `${url}${queryStringify(options.data as Record<string, string>)}` : url;
     return this.request(parsedUrl, {...options});
   };
@@ -34,11 +34,11 @@ export default class HTTPTransport {
     return this.request(url, {...options, method: METHODS.POST});
   };
 
-  put: HTTPRequest = (url, options= {}) => {
+  put: HTTPRequest = (url, options = {}) => {
     return this.request(url, {...options, method: METHODS.PUT});
   };
 
-  delete: HTTPRequest = (url, options= {}) => {
+  delete: HTTPRequest = (url, options = {}) => {
     return this.request(url, {...options, method: METHODS.DELETE});
   };
 

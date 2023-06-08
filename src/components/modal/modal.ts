@@ -7,18 +7,18 @@ interface ModalProps {
 
 export class Modal extends Block {
   static componentName = "Modal";
-  
+
   constructor(props: ModalProps) {
     super(props);
     this.setProps({
-      onCloseModal:()=> {
-        const modalSelector = `.${props.className}` || ".modal"
-        const modal = document.querySelector(modalSelector) as HTMLElement
-        modal.classList.remove('modal_visible')
-      }
+      onCloseModal: () => {
+        const modalSelector = `.${this.props.className}` || ".modal";
+        const modal = document.querySelector(modalSelector) as HTMLElement;
+        modal.classList.remove("modal_visible");
+      },
     });
   }
-  
+
   protected render(): string {
     // language=hbs
     return `

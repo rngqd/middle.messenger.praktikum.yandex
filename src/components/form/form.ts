@@ -10,11 +10,11 @@ interface FormProps {
 
 export class Form extends Block {
   static componentName = "Form";
-  
+
   constructor({onSubmit, ...props}: FormProps) {
     super({...props, events: {submit: onSubmit}});
   }
-  
+
   protected render(): string {
     // language=hbs
     return `

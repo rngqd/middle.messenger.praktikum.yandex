@@ -8,7 +8,7 @@ export class ChatsAPI {
     this.http = new HTTPTransport("/chats");
   }
 
-  getChat(){
+  getChat() {
     return this.http.get("/", {});
   }
 

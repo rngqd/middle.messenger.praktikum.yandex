@@ -1,6 +1,5 @@
 import Block from "../../core/Block";
 import "./avatar.sass";
-import avatarImg from "../../../static/img/avatar.jpeg";
 import {RESOURCE_URL} from "../../utils/constants";
 import "./avatar.sass";
 
@@ -9,6 +8,7 @@ interface AvatarProps {
   isEdit: boolean;
   onClick?: () => void;
 }
+const avatarImg = require("../../../static/img/avatar.jpeg");
 
 export class Avatar extends Block {
   static componentName = "Avatar";

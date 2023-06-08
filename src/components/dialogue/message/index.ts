@@ -10,8 +10,8 @@ export default class DialogueMessage extends Block {
   constructor(props: Message) {
     super(props);
     this.setProps({
-      isMyMessage: store.getState().user.id === this.props.userId
-    })
+      isMyMessage: store.getState().user.id === this.props.userId,
+    });
   }
 
   protected render(): string {

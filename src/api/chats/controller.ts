@@ -65,7 +65,7 @@ export class ChatController {
 
   async fetchChats() {
     try {
-      const chats = await this.api.getChat() as ChatData[];
+      const chats = (await this.api.getChat()) as ChatData[];
       store.set("chats", chats);
     } catch (e: any) {
       console.error(e.message);

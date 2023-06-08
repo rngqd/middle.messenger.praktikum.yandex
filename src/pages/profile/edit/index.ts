@@ -17,8 +17,8 @@ class ProfileEditPageBase extends Block {
         Router.back();
       },
       onEditAvatar: () => {
-        const modal = document.querySelector('.modal') as HTMLElement;
-        modal.classList.add('modal_visible')
+        const modal = document.querySelector(".modal") as HTMLElement;
+        modal.classList.add("modal_visible");
       },
       onBrowseFile: () => {
         document.getElementById("modal__input-file")?.click();
@@ -122,7 +122,7 @@ class ProfileEditPageBase extends Block {
                         onClick=onSaveData
                 }}}
             </div>
-            {{#Modal}}
+            {{#Modal className="modal__edit-avatar"}}
                 {{#Form id="modal__form" onSubmit=onChangeAvatar}}
                     <p class="modal__title">Загрузить файл</p>
                     {{{ InputContainer
