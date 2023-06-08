@@ -1,49 +1,93 @@
-import Block from "../../utils/Block";
+import Block from "../../core/Block";
+import store, {withStore} from "../../store";
+import ChatController from "../../api/chats/controller";
+import {RouterPath} from "../../models/enums";
+import {returnFormData} from "../../utils/functions";
+export class ChatsPageBase extends Block {
+  constructor(props: any) {
+    super(props);
+    void ChatController.fetchChats();
+    this.setProps({
+      onOpenModal: () => {
+        const modal = document.querySelector('.modal_add-chat') as HTMLElement;
+        modal.classList.add('modal_visible')
+      },
+      onCreateChat: (e: Event) => {
+        e.preventDefault();
+        const data = returnFormData("modal__form");
+        console.log(data);
+        if (data?.chats) {
+          void ChatController.createChat(data.chats as string);
+        }
+      },
+      profileLink: RouterPath.profile,
+    });
+  }
 
-import avatar from "../../../static/img/avatar.jpeg";
-
-export class ChatsPage extends Block {
-    render() {
-        // language=hbs
-        const {} = this.state;
-        return `
+  render() {
+    // language=hbs
+    return `
             <main class="main chats-page">
                 <div class="chats-page__container chats-page__container_left">
-                    <a class="chats-page__profile" href="/pages/profile">Профиль</a>
-                    <input class="chats-page__search" type="text" placeholder="Поиск">
+                    <a class="chats-page__profile" href="{{profileLink}}">Профиль</a>
+                    {{{ InputContainer
+                                      type="search"
+                                      name="search"
+                                      id="search"
+                                      placeholder="Поиск"
+                    }}}
                     <div class="chats-page__chats">
-                        {{{ Chat
-                                avatar="${ avatar }"
-                                name="User"
-                                message="message"
-                                time="22:00"
-                                count="2"
-                        }}}
+                        {{#each chats}}
+                            {{{ Chat
+                              avatar=avatar
+                              name=title
+                              message=last_message.content
+                              time=last_message.time
+                              count=unread_count
+                              id=id
+                            }}}
+                        {{/each}}
                     </div>
+                    {{{Button title="Создать чат" className="chats-page__create" onClick=onOpenModal}}}
                 </div>
                 <div class="chats-page__container chats-page__container_right">
-                    <div class="chats-page__chat">
-                        <div class="chats-page__header">
-                            <div class="chats-page__header-container">
-                                <img class="chats-page__header-avatar"
-                                     src="${ avatar }"
-                                     alt="chat-avatar">
-                                <span class="chats-page__header-name">Имя пользователя</p>
-                            </div>
-                            <button class="chats-page__header-function"
-                            ">
-                        </div>
-                        <div class="chats-page__content">
-
-                        </div>
-                        <div class="chats-page__footer">
-                            <button class="chats-page__footer-clip"></button>
-                            <input class="chats-page__footer-input" type="text" placeholder="Сообщение">
-                            <button class="chats-page__footer-send"></button>
-                        </div>
+                
+                {{#if activeChat}}
+                    {{{Dialogue title=activeChat.title activeChatId=activeChat.id messages=messages}}}
+                {{else}}
+                    <div class="chats-page__select">
+                        <h2 class="chats-page__title">Выберите чат</h2>
                     </div>
+                {{/if}}
                 </div>
+                {{#Modal className="modal_add-chat"}}
+                    {{#Form id="modal__form" onSubmit=onCreateChat}}
+                        <h2 class="modal__title">Создать чат</h2>
+                        {{{ InputContainer
+                                className="modal__input-chats"
+                                id="modal__input-text"
+                                type="text"
+                                name="chats"
+                                id="chats"
+                        }}}
+                        {{{Button
+                                className="modal__btn-change"
+                                title="Создать"
+                                type="submit"
+                        }}}
+                    {{/Form}}
+                {{/Modal}}
             </main>
         `;
-    }
+  }
 }
+
+const withChats = withStore(state => {
+  return {
+    chats: [...(state.chats || [])],
+    messages: [...(state.messages || [])],
+    activeChat: state.activeChat,
+  };
+});
+
+export const ChatsPage = withChats(ChatsPageBase);

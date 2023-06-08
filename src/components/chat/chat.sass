@@ -1,11 +1,14 @@
-@import "src/styles/variables.sass"
+@import 'src/styles/variables.sass'
 .chat
+  box-sizing: border-box
   padding: 12px 10px
-  border-top: 1px solid $dark
-  border-bottom: 1px solid $dark
+  border-radius: 10px
+  border: 1px solid $dark
   display: flex
-  &:not(:first-child)
-    margin-top: -1px
+  width: 100%
+  margin-bottom: 5px
+  &:hover
+    cursor: pointer
 
   &_selected
     background: $accent
@@ -23,8 +26,10 @@
     flex-direction: column
 
     &_data
+      display: flex
       margin-left: auto
       justify-content: space-between
+      align-items: flex-end
 
   &__profile-name
     font-weight: 600
@@ -45,6 +50,8 @@
 
   &__message-count
     padding: 4px
+    width: 20px
+    height: 20px
     font-size: 11px
     line-height: 1
     text-align: center
