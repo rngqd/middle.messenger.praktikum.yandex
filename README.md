@@ -33,9 +33,13 @@
 - «[PR sprint 1](https://github.com/kronos2033/middle.messenger.praktikum.yandex/pull/1)»,
 - «[Проект на Netlify](https://lovely-lamington-e450cf.netlify.app/)»,
 - https://lovely-lamington-e450cf.netlify.app/
-## Sprint 4
 
-по умолчанию проект запускается на 3000 порту
-docker build -t <CONTAINER_NAME> .     
-docker run -p 8000:3000 -d <CONTAINER_NAME> 
+## Sprint 4
+### В четвертом спринте не вносились функциональные изменения, которые влияют на опыт использования пользователя. Однако были произведены внутренние изменения. Произошел переход с parcel на webpack, были добавлены тесты, precommit, а так же docker файл для возможности создания docker контейнера. 
+
+### Для использования docker следует использовать следующие команды
+### Создание контейнера 
+>docker build -t <CONTAINER_NAME> .
+### Запуск контейнера
+>docker run -p 8000:3000 -d <CONTAINER_NAME> 
 
