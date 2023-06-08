@@ -1,11 +1,13 @@
 import Block from "../../core/Block";
-import avatarImg from "../../../static/img/avatar.jpeg";
 import ChatController from "../../api/chats/controller";
 import MessageSocket from "../../api/message";
 import "./dialogue.sass";
 import {RESOURCE_URL} from "../../utils/constants";
 import store from "../../store";
 import {ChatData} from "../../models";
+
+const avatarImg = require("../../../static/img/avatar.jpeg");
+
 interface DialogueProps {
   avatar?: string;
   title?: string;

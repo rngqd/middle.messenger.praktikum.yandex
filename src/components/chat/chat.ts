@@ -1,14 +1,12 @@
 import Block from "../../core/Block";
-import avatarImg from "../../../static/img/avatar.jpeg";
 import store, {withStore} from "../../store";
 import ChatController from "../../api/chats/controller";
 import MessageSocket from "../../api/message";
 import {ChatData} from "../../models";
-
 import "./chat.sass";
+
 import {RESOURCE_URL} from "../../utils/constants";
 import {formatDate} from "../../utils/functions";
-
 interface ChatProps {
   avatar?: string;
   name: string;
@@ -18,6 +16,8 @@ interface ChatProps {
   isAnswer: boolean;
   onClick: () => void;
 }
+
+const avatarImg = require("../../../static/img/avatar.jpeg");
 
 export class ChatBase extends Block {
   static componentName = "Chat";

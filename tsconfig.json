@@ -16,10 +16,11 @@
     "strictNullChecks": true,
     "typeRoots": [
       "node_modules/@types",
-      "./index.d.ts"
+      "./index.d.ts",
     ],
     "types": ["mocha", "node"]
   },
+  "include": ["index.d.ts"],
   "ts-node": {
     "files": true
   }
