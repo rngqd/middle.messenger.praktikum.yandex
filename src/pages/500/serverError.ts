@@ -6,7 +6,7 @@ export class ServerErrorPage extends Block {
     super(props);
     this.setProps({
       defaultLink: RouterPath.default,
-    })
+    });
   }
   protected render() {
     // language=hbs
