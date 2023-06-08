@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import  {withStore} from "../../store";
+import {withStore} from "../../store";
 import ChatController from "../../api/chats/controller";
 import {RouterPath} from "../../models/enums";
 import {returnFormData} from "../../utils/functions";
@@ -9,8 +9,8 @@ export class ChatsPageBase extends Block {
     void ChatController.fetchChats();
     this.setProps({
       onOpenModal: () => {
-        const modal = document.querySelector('.modal_add-chat') as HTMLElement;
-        modal.classList.add('modal_visible')
+        const modal = document.querySelector(".modal_add-chat") as HTMLElement;
+        modal.classList.add("modal_visible");
       },
       onCreateChat: (e: Event) => {
         e.preventDefault();

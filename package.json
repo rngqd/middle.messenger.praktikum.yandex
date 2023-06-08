@@ -10,13 +10,8 @@
     "prettier:fix": "prettier --write 'src/**/*.ts'",
     "checks": "npm-run-all prettier",
     "stylelint": "stylelint \"**/*.sass\"",
-    "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
+    "test": "mocha  --require ./mochaSetup.js",
     "prepare": "husky install"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all stylelint prettier:fix test"
-    }
   },
   "author": "Alexandr Mykovnya",
   "license": "ISC",

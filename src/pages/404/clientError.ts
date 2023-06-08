@@ -5,8 +5,8 @@ export class ClientErrorPage extends Block {
   constructor(props: unknown) {
     super(props);
     this.setProps({
-      defaultLink: RouterPath.default
-    })
+      defaultLink: RouterPath.default,
+    });
   }
   render() {
     // language=hbs

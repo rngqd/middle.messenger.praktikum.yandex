@@ -17,8 +17,8 @@ class ProfileEditPageBase extends Block {
         Router.back();
       },
       onEditAvatar: () => {
-        const modal = document.querySelector('.modal') as HTMLElement;
-        modal.classList.add('modal_visible')
+        const modal = document.querySelector(".modal") as HTMLElement;
+        modal.classList.add("modal_visible");
       },
       onBrowseFile: () => {
         document.getElementById("modal__input-file")?.click();

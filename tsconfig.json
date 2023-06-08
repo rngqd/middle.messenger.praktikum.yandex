@@ -16,7 +16,12 @@
     "strictNullChecks": true,
     "typeRoots": [
       "node_modules/@types",
-      "typings/app.d.ts"
-    ]
+      "./index.d.ts"
+    ],
+    "types": ["mocha", "node"]
+  },
+  "ts-node": {
+    "files": true
   }
 }
+

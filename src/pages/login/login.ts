@@ -14,7 +14,7 @@ export class LoginPage extends Block {
         if (!validateForm(".login-page__form")) {
           return;
         }
-        
+
         const formData = returnFormData("login-page__form");
         if (formData) {
           void AuthController.signin(formData as unknown as LoginData);
@@ -23,7 +23,7 @@ export class LoginPage extends Block {
       registerLink: RouterPath.register,
     });
   }
-  
+
   protected render() {
     // language=hbs
     return `

@@ -57,11 +57,11 @@ export function returnFormData(formId: string) {
   }
 }
 
-export function formatDate (date: Date): string {
-  const addZero = (number: number) => number > 9 ? `${number}` : `0${number}`
+export function formatDate(date: Date): string {
+  const addZero = (number: number) => (number > 9 ? `${number}` : `0${number}`);
   const parsedDate = new Date(date);
   const hours = parsedDate.getHours();
   const minutes = parsedDate.getMinutes();
-  
-  return `${addZero(hours)}:${addZero(minutes)}`
+
+  return `${addZero(hours)}:${addZero(minutes)}`;
 }

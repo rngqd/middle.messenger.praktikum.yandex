@@ -8,5 +8,4 @@ export enum RouterPath {
   editProfilePassword = "/settings/edit-password",
   clientError = "/404",
   serverError = "/500",
-  
 }

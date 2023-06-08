@@ -1,26 +1,14 @@
-const {JSDOM} = require("jsdom");
-const fs = require("fs")
-const Handlebars = require("handlebars")
+const { JSDOM } = require("jsdom");
 
-const dom = new JSDOM(`
-        <!DOCTYPE html>
-        <html lang="ru">
-          <body>
-            <div id="app"></div>
-          </body>
-        </html>
-`);
+const dom = new JSDOM('<div class="app"></div>', {
+  url: "http://localhost:3000",
+});
 
-global.window = dom.window
-global.document = dom.window.document
-global.DocumentFragment = dom.window.DocumentFragment
 
-require.extensions[".hbs"] = (module, filename) => {
-  const contents = fs.readFileSync(filename,  'utf-8');
-  module.exports = Handlebars.compile (contents);
-}
+global.window = dom.window;
+global.document = dom.window.document;
+global.DocumentFragment = dom.window.DocumentFragment;
 
-require.extensions[".sass"] = () => {
+require.extensions[".sass"] = function () {
   module.exports = {};
-}
-
+};

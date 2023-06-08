@@ -3,7 +3,7 @@ import Route from "./Route";
 
 class Router {
   private static __instance: Router;
-  private routes: Route[] = [];
+  readonly routes: Route[] = [];
   private currentRoute: Route | null = null;
   private history: History = window.history;
 

@@ -23,27 +23,27 @@ export class Dialogue extends Block {
         store.set("activeChat", null);
       },
       onOpenAddModal: () => {
-        const modal = document.querySelector('.modal_add-user') as HTMLElement;
-        modal.classList.add('modal_visible')
+        const modal = document.querySelector(".modal_add-user") as HTMLElement;
+        modal.classList.add("modal_visible");
       },
       onAddUser: async (e: Event) => {
-        e.preventDefault()
+        e.preventDefault();
         const userId = document.getElementById("modal__input-add") as HTMLInputElement;
         await ChatController.addUser({users: [+userId.value], chatId: this.props.dialogueID});
         await ChatController.getChatUsers(this.props.dialogueID, {} as ChatData);
       },
       onOpenDeleteModal: () => {
-        const modal = document.querySelector('.modal_delete-user') as HTMLElement;
-        modal.classList.add('modal_visible')
+        const modal = document.querySelector(".modal_delete-user") as HTMLElement;
+        modal.classList.add("modal_visible");
       },
       onDeleteUser: async (e: Event) => {
-        e.preventDefault()
+        e.preventDefault();
         const userId = document.getElementById("modal__input-delete") as HTMLInputElement;
         await ChatController.deleteUser({users: [+userId.value], chatId: this.props.dialogueID});
         await ChatController.getChatUsers(this.props.dialogueID, {} as ChatData);
       },
       onSendMessage: (e: Event) => {
-        e.preventDefault()
+        e.preventDefault();
         const input = document.getElementById("message") as HTMLInputElement;
         if (input) {
           const value = input.value;

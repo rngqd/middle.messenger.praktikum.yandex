@@ -5,7 +5,7 @@ export class ServerErrorPage extends Block {
   constructor(props: unknown) {
     super(props);
     this.setProps({
-        defaultLink: RouterPath.default
+      defaultLink: RouterPath.default,
     })
   }
   protected render() {
